@@ -11,6 +11,9 @@
     "test": "npm run eslint && npm run stylelint && gulp test"
   },
   "devDependencies": {
+    "@commitlint/cli": "7.0.0",
+    "@commitlint/config-conventional": "7.0.1",
+    "@commitlint/prompt-cli": "7.0.0",
     "autoprefixer": "9.0.2",
     "browser-sync": "2.24.6",
     "cross-env": "5.2.0",
