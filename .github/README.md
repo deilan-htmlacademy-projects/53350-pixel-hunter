@@ -1,7 +1,7 @@
 # Личный проект «Пиксель хантер» [![Build status][travis-image]][travis-url]
 
 * Студент: [Михаил Овчинников](https://up.htmlacademy.ru/ecmascript/6/user/53350).
-* Наставник: `Неизвестно`.
+* Наставник: [Саша Ивашкин](https://up.htmlacademy.ru/ecmascript/6/user/7280).
 
 ---
 
