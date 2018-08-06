@@ -4,12 +4,14 @@
   "private": true,
   "description": "Личный проект «Пиксель хантер» от HTML Academy",
   "scripts": {
+    "lint:commit": "commitlint-travis",
     "lint:js": "eslint ./gulpfile.js js/",
     "lint:scss": "stylelint 'sass/**/*.scss' --syntax scss",
     "build": "gulp build",
     "start": "gulp serve",
     "test": "gulp test",
-    "ci": "npm-run-all --parallel lint:* test build"
+    "ci:travis": "npm-run-all -c -p --aggregate-output lint:* test build",
+    "ci": "npm-run-all -c -p --aggregate-output lint:js lint:scss test build"
   },
   "devDependencies": {
     "@commitlint/cli": "7.0.0",
