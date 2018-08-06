@@ -29,6 +29,7 @@
     "gulp-rename": "1.4.0",
     "gulp-sass": "4.0.1",
     "gulp-svgstore": "6.1.1",
+    "husky": "1.0.0-rc.13",
     "stylelint": "9.4.x",
     "stylelint-config-htmlacademy": "0.1.x"
   },
