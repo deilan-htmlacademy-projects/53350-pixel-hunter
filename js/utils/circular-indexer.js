@@ -8,17 +8,23 @@
     this.current = initial;
   };
   CircularIndexer.prototype.prev = function () {
-    return this.current > 0 ? --this.current : (this.current = this.count - 1);
+    this.current = this.current > 0
+      ? this.current - 1
+      : this.count - 1;
+    return this.current;
   };
   CircularIndexer.prototype.next = function () {
-    return this.current < this.count - 1 ? ++this.current : (this.current = 0);
+    this.current = this.current < this.count - 1
+      ? this.current + 1
+      : 0;
+    return this.current;
   };
   CircularIndexer.prototype.set = function (index) {
     verifyIndex(index, this.count);
     return (this.current = index);
   };
   function verifyCount(count) {
-    if (!Number.isInteger(count)) {
+    if (!(Number.isInteger(count))) {
       throw new Error(`count must be an integer number`);
     }
     if (!(count >= 1)) {
@@ -26,7 +32,7 @@
     }
   }
   function verifyIndex(index, count) {
-    if (!Number.isInteger(index)) {
+    if (!(Number.isInteger(index))) {
       throw new Error(`index must be an integer number`);
     }
     if (!(index >= 0 && index <= count - 1)) {

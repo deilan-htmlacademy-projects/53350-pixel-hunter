@@ -3,7 +3,10 @@
 (function (window) {
   window.createKeydownHandler = (keyCodeHandlersMap) => {
     return (ev) => {
-      keyCodeHandlersMap[ev.keyCode]();
+      const handler = keyCodeHandlersMap[ev.code];
+      if (handler) {
+        handler();
+      }
     };
   };
 })(window);

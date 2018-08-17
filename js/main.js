@@ -1,10 +1,10 @@
 "use strict";
 
-const INITIAL_SLIDE = 3;
+const INITIAL_SLIDE = 0;
 
 const KEY_CODES = Object.freeze({
-  LEFT_ARROW: 37,
-  RIGHT_ARROW: 39
+  ARROW_LEFT: `ArrowLeft`,
+  ARROW_RIGHT: `ArrowRight`
 });
 
 const TEMPLATES_IDS = [
@@ -28,8 +28,8 @@ const nextHandler = slider.next.bind(slider);
 
 const paginator = window.createPaginator(prevHandler, nextHandler);
 const keydownHandler = window.createKeydownHandler({
-  [KEY_CODES.LEFT_ARROW]: prevHandler,
-  [KEY_CODES.RIGHT_ARROW]: nextHandler,
+  [KEY_CODES.ARROW_LEFT]: prevHandler,
+  [KEY_CODES.ARROW_RIGHT]: nextHandler,
 });
 document.body.appendChild(paginator);
 document.addEventListener(`keydown`, keydownHandler);
