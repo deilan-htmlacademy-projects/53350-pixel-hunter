@@ -30,7 +30,7 @@
   }
 
   function verifyTemplates(templates) {
-    if (!(Array.isArray(templates) && templates.every((st) => st instanceof HTMLTemplateElement))) {
+    if (!Array.isArray(templates) || !templates.every((st) => st instanceof HTMLTemplateElement)) {
       throw new Error(`templates must be an array of ${HTMLTemplateElement.name}`);
     }
   }

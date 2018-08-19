@@ -21,22 +21,23 @@
   };
   CircularIndexer.prototype.set = function (index) {
     verifyIndex(index, this.count);
-    return (this.current = index);
+    this.current = index;
+    return this.current;
   };
   function verifyCount(count) {
-    if (!(Number.isInteger(count))) {
+    if (!Number.isInteger(count)) {
       throw new Error(`count must be an integer number`);
     }
-    if (!(count >= 1)) {
+    if (count < 0) {
       throw new Error(`count must be greater than ${0}`);
     }
   }
   function verifyIndex(index, count) {
-    if (!(Number.isInteger(index))) {
+    if (!Number.isInteger(index)) {
       throw new Error(`index must be an integer number`);
     }
-    if (!(index >= 0 && index <= count - 1)) {
-      throw new Error(`index must be between ${0} and ${count - 1}`);
+    if (index < 0 || index > count - 1) {
+      throw new Error(`index must be between 0 and ${count - 1}`);
     }
   }
   window.CircularIndexer = CircularIndexer;
