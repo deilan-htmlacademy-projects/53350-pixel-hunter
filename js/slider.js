@@ -1,11 +1,12 @@
-import {CircularIndexer} from './utils/circular-indexer';
+import {CircularIndexer} from "./utils/circular-indexer";
+import {Screen} from "./screens/screen";
 
-const Slider = function (container, templates) {
+const Slider = function (container, screens) {
   verifyContainer(container);
-  verifyTemplates(templates);
+  verifyScreens(screens);
   this.container = container;
-  this.templates = templates;
-  this.indexer = new CircularIndexer(this.templates.length);
+  this.screens = this.initScreens(screens);
+  this.indexer = new CircularIndexer(this.screens.length);
 };
 Slider.prototype.select = function (index) {
   this._select(this.indexer.set(index));
@@ -16,10 +17,20 @@ Slider.prototype.prev = function () {
 Slider.prototype.next = function () {
   this._select(this.indexer.next());
 };
+Slider.prototype.reset = function () {
+  this._select(this.indexer.set(0));
+};
 Slider.prototype._select = function (index) {
   this.container.innerHTML = ``;
-  const slide = this.templates[index].content.cloneNode(true);
-  this.container.appendChild(slide);
+  this.container.appendChild(this.screens[index].view);
+};
+Slider.prototype.initScreens = function (screens) {
+  for (let screen of screens) {
+    screen.prev.add(this.prev.bind(this));
+    screen.next.add(this.next.bind(this));
+    screen.reset.add(this.reset.bind(this));
+  }
+  return screens;
 };
 
 function verifyContainer(container) {
@@ -28,9 +39,15 @@ function verifyContainer(container) {
   }
 }
 
-function verifyTemplates(templates) {
-  if (!Array.isArray(templates) || !templates.every((st) => st instanceof HTMLTemplateElement)) {
-    throw new Error(`templates must be an array of ${HTMLTemplateElement.name}`);
+function verifyScreens(screens) {
+  if (!Array.isArray(screens)) {
+    throw new Error(`screens must be an array of ${Screen.name}`);
+  }
+  if (screens.length === 0) {
+    throw new Error(`screens must contain at least one item`);
+  }
+  if (!screens.every((st) => st instanceof Screen)) {
+    throw new Error(`screens items must be instances of ${Screen.name}`);
   }
 }
 

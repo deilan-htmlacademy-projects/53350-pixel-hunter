@@ -1,8 +1,7 @@
-import {createTemplate} from "../utils/dom/document";
+import {Screen} from "./screen";
 
-// Игровой экран с одним изображением
-const html =
-`<header class="header">
+// Игровой экран с тремя изображениями
+const template = `<header class="header">
   <button class="back">
     <span class="visually-hidden">Вернуться к началу</span>
     <svg class="icon" width="45" height="45" viewBox="0 0 45 45" fill="#000000">
@@ -20,18 +19,16 @@ const html =
   </div>
 </header>
 <section class="game">
-  <p class="game__task">Угадай, фото или рисунок?</p>
-  <form class="game__content  game__content--wide">
+  <p class="game__task">Найдите рисунок среди изображений</p>
+  <form class="game__content  game__content--triple">
     <div class="game__option">
-      <img src="http://placehold.it/705x455" alt="Option 1" width="705" height="455">
-      <label class="game__answer  game__answer--photo">
-        <input class="visually-hidden" name="question1" type="radio" value="photo">
-        <span>Фото</span>
-      </label>
-      <label class="game__answer  game__answer--paint">
-        <input class="visually-hidden" name="question1" type="radio" value="paint">
-        <span>Рисунок</span>
-      </label>
+      <img src="http://placehold.it/304x455" alt="Option 1" width="304" height="455">
+    </div>
+    <div class="game__option  game__option--selected">
+      <img src="http://placehold.it/304x455" alt="Option 2" width="304" height="455">
+    </div>
+    <div class="game__option">
+      <img src="http://placehold.it/304x455" alt="Option 3" width="304" height="455">
     </div>
   </form>
   <ul class="stats">
@@ -47,4 +44,15 @@ const html =
     <li class="stats__result stats__result--unknown"></li>
   </ul>
 </section>`;
-export default createTemplate(html);
+
+export class Game3Screen extends Screen {
+  constructor() {
+    super(template);
+    const gameOptions = Array.from(this.view.querySelectorAll(`.game__option`));
+    for (let gameOption of gameOptions) {
+      gameOption.addEventListener(`click`, () => {
+        this.next.emit();
+      });
+    }
+  }
+}

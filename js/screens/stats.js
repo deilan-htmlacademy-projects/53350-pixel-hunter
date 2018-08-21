@@ -1,8 +1,7 @@
-import {createTemplate} from "../utils/dom/document";
+import {Screen} from "./screen";
 
 // Общая статистика по всем игрокам
-const html =
-`<header class="header">
+const tepmlate = `<header class="header">
   <button class="back">
     <span class="visually-hidden">Вернуться к началу</span>
     <svg class="icon" width="45" height="45" viewBox="0 0 45 45" fill="#000000">
@@ -113,4 +112,9 @@ const html =
     </tr>
   </table>
 </section>`;
-export default createTemplate(html);
+
+export class StatsScreen extends Screen {
+  constructor() {
+    super(tepmlate);
+  }
+}

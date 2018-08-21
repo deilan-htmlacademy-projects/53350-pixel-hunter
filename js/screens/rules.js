@@ -1,8 +1,7 @@
-import {createTemplate} from "../utils/dom/document";
+import {Screen} from "./screen";
 
 // Правила игры
-const html =
-`<header class="header">
+const template = `<header class="header">
   <button class="back">
     <span class="visually-hidden">Вернуться к началу</span>
     <svg class="icon" width="45" height="45" viewBox="0 0 45 45" fill="#000000">
@@ -29,4 +28,20 @@ const html =
     <button class="rules__button  continue" type="submit" disabled>Go!</button>
   </form>
 </section>`;
-export default createTemplate(html);
+
+export class RulesScreen extends Screen {
+  constructor() {
+    super(template);
+    const rulesInput = this.view.querySelector(`.rules__input`);
+    const rulesBtn = this.view.querySelector(`.rules__button`);
+    const rulesForm = this.view.querySelector(`.rules__form`);
+    rulesInput.addEventListener(`input`, (evt) => {
+      rulesBtn.disabled = !evt.target.value;
+    });
+    rulesForm.addEventListener(`submit`, (evt) => {
+      evt.preventDefault();
+      this.next.emit();
+      return false;
+    });
+  }
+}

@@ -1,9 +1,9 @@
-export function createPaginator(leftBtnClickHandler, rightBtnClickHandler) {
+export function createPaginator({prevHandler, nextHandler}) {
   const container = document.createElement(`div`);
   container.classList.add(`arrows__wrap`);
   container.appendChild(createStyle());
-  container.appendChild(createButton(`<-`, leftBtnClickHandler));
-  container.appendChild(createButton(`->`, rightBtnClickHandler));
+  container.appendChild(createButton(`<-`, prevHandler));
+  container.appendChild(createButton(`->`, nextHandler));
   return container;
 }
 

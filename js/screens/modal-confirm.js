@@ -1,8 +1,7 @@
-import {createTemplate} from "../utils/dom/document";
+import {Screen} from "./screen";
 
 // Модальное окно с подтверждением
-const html =
-`<section class="modal">
+const template = `<section class="modal">
   <form class="modal__inner">
     <button class="modal__close" type="button">
       <span class="visually-hidden">Закрыть</span>
@@ -15,4 +14,9 @@ const html =
     </div>
   </form>
 </section>`;
-export default createTemplate(html);
+
+export class ModalConfirmScreen extends Screen {
+  constructor() {
+    super(template);
+  }
+}

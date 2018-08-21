@@ -1,8 +1,7 @@
-import {createTemplate} from "../utils/dom/document";
+import {Screen} from "./screen";
 
 // Приветствие
-const html =
-`<section class="greeting central--blur">
+const template = `<section class="greeting central--blur">
   <img class="greeting__logo" src="img/logo_ph-big.svg" width="201" height="89" alt="Pixel Hunter">
   <div class="greeting__asterisk asterisk"><span class="visually-hidden">Я просто красивая звёздочка</span>*</div>
   <div class="greeting__challenge">
@@ -22,4 +21,11 @@ const html =
     </svg>
   </button>
 </section>`;
-export default createTemplate(html);
+
+export class GreetingScreen extends Screen {
+  constructor() {
+    super(template);
+    const continueBtn = this.view.querySelector(`.greeting__continue`);
+    continueBtn.addEventListener(`click`, () => this.next.emit());
+  }
+}

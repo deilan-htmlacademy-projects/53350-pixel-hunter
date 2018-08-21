@@ -1,8 +1,7 @@
-import {createTemplate} from "../utils/dom/document";
+import {Screen} from "./screen";
 
 // Игровой экран с двумя изображениями
-const html =
-`<header class="header">
+const template = `<header class="header">
   <button class="back">
     <span class="visually-hidden">Вернуться к началу</span>
     <svg class="icon" width="45" height="45" viewBox="0 0 45 45" fill="#000000">
@@ -58,4 +57,24 @@ const html =
     <li class="stats__result stats__result--unknown"></li>
   </ul>
 </section>`;
-export default createTemplate(html);
+
+export class Game1Screen extends Screen {
+  constructor() {
+    super(template);
+    const inputs = Array.from(this.view.querySelectorAll(`input`));
+    for (let input of inputs) {
+      input.addEventListener(`change`, () => {
+        if (this.isEveryOptionChecked()) {
+          this.next.emit();
+        }
+      });
+    }
+  }
+
+  isEveryOptionChecked() {
+    const gameOptions = Array.from(this.view.querySelectorAll(`.game__option`));
+    return gameOptions.every((gameOption) => {
+      return gameOption.querySelector(`input[type=radio]:checked`);
+    });
+  }
+}

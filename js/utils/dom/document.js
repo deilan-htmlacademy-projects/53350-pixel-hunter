@@ -1,5 +1,5 @@
-export function createTemplate(html) {
-  const el = document.createElement(`template`);
-  el.innerHTML = html;
+export function createView(template) {
+  const el = document.createElement(`div`);
+  el.innerHTML = template;
   return el;
 }
