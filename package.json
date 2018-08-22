@@ -20,6 +20,7 @@
     "@commitlint/travis-cli": "7.0.0",
     "autoprefixer": "9.0.2",
     "browser-sync": "2.24.6",
+    "chai": "4.1.2",
     "cross-env": "5.2.0",
     "css-mqpacker": "7.0.0",
     "del": "3.0.0",
