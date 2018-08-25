@@ -48,11 +48,16 @@ const template = `<header class="header">
 export class Game3Screen extends Screen {
   constructor() {
     super(template);
-    const gameOptions = Array.from(this.view.querySelectorAll(`.game__option`));
-    for (let gameOption of gameOptions) {
-      gameOption.addEventListener(`click`, () => {
-        this.next.emit();
-      });
+    const gameElem = this.view.querySelector(`.game__content`);
+    if (!gameElem) {
+      throw new Error(`.game__content does not exist`);
     }
+    gameElem.addEventListener(`click`, (event) => {
+      const gameOptionElem = event.target.closest(`.game__option`);
+      if (!gameOptionElem) {
+        return;
+      }
+      this.next.emit();
+    });
   }
 }

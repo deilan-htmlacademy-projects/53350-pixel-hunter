@@ -61,14 +61,21 @@ const template = `<header class="header">
 export class Game1Screen extends Screen {
   constructor() {
     super(template);
-    const inputs = Array.from(this.view.querySelectorAll(`input`));
-    for (let input of inputs) {
-      input.addEventListener(`change`, () => {
-        if (this.isEveryOptionChecked()) {
-          this.next.emit();
-        }
-      });
+    const gameElem = this.view.querySelector(`.game__content`);
+    if (!gameElem) {
+      throw new Error(`.game__content does not exist`);
     }
+    gameElem.addEventListener(`input`, (event) => {
+      if (
+        event.target.tagName !== `INPUT` ||
+        !event.currentTarget.contains(event.target)
+      ) {
+        return;
+      }
+      if (this.isEveryOptionChecked()) {
+        this.next.emit();
+      }
+    });
   }
 
   isEveryOptionChecked() {
