@@ -57,7 +57,7 @@ export class Game3Screen extends Screen {
       if (!gameOptionElem) {
         return;
       }
-      this.next.emit();
+      this.next.fire();
     });
   }
 }

@@ -73,7 +73,7 @@ export class Game1Screen extends Screen {
         return;
       }
       if (this.isEveryOptionChecked()) {
-        this.next.emit();
+        this.next.fire();
       }
     });
   }

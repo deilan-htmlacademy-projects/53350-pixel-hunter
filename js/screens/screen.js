@@ -9,7 +9,7 @@ export class Screen {
     this.reset = new EventEmitter();
     const backBtn = this.view.querySelector(`.back`);
     if (backBtn) {
-      backBtn.addEventListener(`click`, () => this.reset.emit());
+      backBtn.addEventListener(`click`, () => this.reset.fire());
     }
   }
 }

@@ -1,20 +1,20 @@
 export class EventEmitter {
   constructor() {
-    this.handlers = [];
+    this._handlers = [];
   }
 
-  add(handler) {
+  on(handler) {
     verifyHandler(handler);
-    this.handlers = [...this.handlers, handler];
+    this._handlers = [...this._handlers, handler];
   }
 
   remove(handler) {
     verifyHandler(handler);
-    this.handlers = this.handlers.filter((h) => h !== handler);
+    this._handlers = this._handlers.filter((h) => h !== handler);
   }
 
-  emit() {
-    for (let handler of this.handlers) {
+  fire() {
+    for (let handler of this._handlers) {
       handler();
     }
   }
