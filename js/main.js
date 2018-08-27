@@ -1,4 +1,14 @@
-"use strict";
+import {IntroScreen} from "./screens/intro";
+import {GreetingScreen} from "./screens/greeting";
+import {RulesScreen} from "./screens/rules";
+import {Game1Screen} from "./screens/game-1";
+import {Game2Screen} from "./screens/game-2";
+import {Game3Screen} from "./screens/game-3";
+import {StatsScreen} from "./screens/stats";
+
+import {Slider} from "./slider";
+import {createPaginator} from "./utils/dom/paginator";
+import {createKeydownHandler} from "./utils/dom/keyboard";
 
 const INITIAL_SLIDE = 0;
 
@@ -7,31 +17,29 @@ const KEY_CODES = Object.freeze({
   ARROW_RIGHT: `ArrowRight`
 });
 
-const TEMPLATES_IDS = [
-  `intro`,
-  `greeting`,
-  `rules`,
-  `game-1`,
-  `game-2`,
-  `game-3`,
-  `stats`,
-  `modal-error`,
-  `modal-confirm`
+const screens = [
+  new IntroScreen(),
+  new GreetingScreen(),
+  new RulesScreen(),
+  new Game1Screen(),
+  new Game2Screen(),
+  new Game3Screen(),
+  new StatsScreen()
 ];
 
 const mainEl = document.querySelector(`#main`);
-const templateEls = window.getTemplates(TEMPLATES_IDS);
 
-const slider = new window.Slider(mainEl, templateEls);
+const slider = new Slider(mainEl, screens);
 const prevHandler = slider.prev.bind(slider);
 const nextHandler = slider.next.bind(slider);
 
-const paginator = window.createPaginator(prevHandler, nextHandler);
-const keydownHandler = window.createKeydownHandler({
-  [KEY_CODES.ARROW_LEFT]: prevHandler,
-  [KEY_CODES.ARROW_RIGHT]: nextHandler,
-});
+const paginator = createPaginator({prevHandler, nextHandler});
 document.body.appendChild(paginator);
+
+const keydownHandler = createKeydownHandler({
+  [KEY_CODES.ARROW_LEFT]: prevHandler,
+  [KEY_CODES.ARROW_RIGHT]: nextHandler
+});
 document.addEventListener(`keydown`, keydownHandler);
 
 slider.select(INITIAL_SLIDE);

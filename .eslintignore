@@ -1,0 +1,4 @@
+gulpfile.js
+commitlint.config.js
+husky.config.js
+build/**/*.js
