@@ -3,6 +3,10 @@ const CORRECTNESS_SCORE = Object.freeze({
   CORRECT: 100
 });
 
+const SUB_MIN_ANSWERS_SCORE = -1;
+const MIN_ANSWERS_COUNT = 10;
+const LIVE_SCORE = 50;
+
 const SPEED_SCORE = Object.freeze({
   SLOW: -50,
   AVERAGE: 0,
@@ -17,16 +21,15 @@ const SPEED_TIME = Object.freeze({
 export function calculateScore(answers, livesCount) {
   verifyAnswers(answers);
   verifyLivesCount(livesCount);
-  if (answers.length < 10) {
-    return -1;
+  if (answers.length < MIN_ANSWERS_COUNT) {
+    return SUB_MIN_ANSWERS_SCORE;
   }
   return calculateAnswerTotalScore(answers) + calculateLivesScore(livesCount);
 }
 
 function calculateAnswerTotalScore(answers) {
   return answers.reduce((score, answer) => {
-    score += calculateAnswerScore(answer);
-    return score;
+    return score + calculateAnswerScore(answer);
   }, 0);
 }
 
@@ -47,7 +50,7 @@ function calculateAnswerSpeedScore(answer) {
 }
 
 function calculateLivesScore(livesCount) {
-  return livesCount * 50;
+  return livesCount * LIVE_SCORE;
 }
 
 function verifyAnswers(answers) {
