@@ -26,6 +26,6 @@ export class GreetingScreen extends Screen {
   constructor() {
     super(template);
     const continueBtn = this.view.querySelector(`.greeting__continue`);
-    continueBtn.addEventListener(`click`, () => this.next.emit());
+    continueBtn.addEventListener(`click`, () => this.next.fire());
   }
 }

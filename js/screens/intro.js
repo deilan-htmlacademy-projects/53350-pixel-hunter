@@ -10,6 +10,6 @@ export class IntroScreen extends Screen {
   constructor() {
     super(template);
     const asterisk = this.view.querySelector(`.intro__asterisk`);
-    asterisk.addEventListener(`click`, () => this.next.emit());
+    asterisk.addEventListener(`click`, () => this.next.fire());
   }
 }

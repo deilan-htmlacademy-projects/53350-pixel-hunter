@@ -26,9 +26,9 @@ Slider.prototype._select = function (index) {
 };
 Slider.prototype.initScreens = function (screens) {
   for (let screen of screens) {
-    screen.prev.add(this.prev.bind(this));
-    screen.next.add(this.next.bind(this));
-    screen.reset.add(this.reset.bind(this));
+    screen.prev.on(this.prev.bind(this));
+    screen.next.on(this.next.bind(this));
+    screen.reset.on(this.reset.bind(this));
   }
   return screens;
 };
