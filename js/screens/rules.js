@@ -40,7 +40,7 @@ export class RulesScreen extends Screen {
     });
     rulesForm.addEventListener(`submit`, (evt) => {
       evt.preventDefault();
-      this.next.emit();
+      this.next.fire();
       return false;
     });
   }
