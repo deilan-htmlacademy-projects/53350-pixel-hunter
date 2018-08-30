@@ -1,6 +1,6 @@
 export function createKeydownHandler(keyCodeHandlersMap) {
-  return (ev) => {
-    const handler = keyCodeHandlersMap[ev.code];
+  return ({code}) => {
+    const handler = keyCodeHandlersMap[code];
     if (handler) {
       handler();
     }

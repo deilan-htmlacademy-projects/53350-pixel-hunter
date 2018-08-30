@@ -1,5 +1,5 @@
 import {CircularIndexer} from "./utils/circular-indexer";
-import {Screen} from "./screens/screen";
+import {Screen} from "./screens/common/screen";
 
 const Slider = function (container, screens) {
   verifyContainer(container);

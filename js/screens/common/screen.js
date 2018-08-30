@@ -1,9 +1,9 @@
-import {createView} from "../utils/dom/document";
-import {EventEmitter} from "../utils/event-emitter";
+import {createElement} from "../../utils/dom/document";
+import {EventEmitter} from "../../utils/event-emitter";
 
 export class Screen {
   constructor(template) {
-    this.view = createView(template);
+    this.view = createElement(template);
     this.prev = new EventEmitter();
     this.next = new EventEmitter();
     this.reset = new EventEmitter();

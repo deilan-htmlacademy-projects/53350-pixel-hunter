@@ -1,4 +1,4 @@
-import {Screen} from "./screen";
+import {Screen} from "./common/screen";
 
 // Модальное окно с подтверждением
 const template = `<section class="modal">
