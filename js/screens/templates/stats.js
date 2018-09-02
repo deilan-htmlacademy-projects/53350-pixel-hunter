@@ -1,3 +1,5 @@
+import {getAnswerRank} from "../../score";
+
 export function getStats(game) {
   return `<ul class="stats">
     ${getResults(game)}
@@ -6,11 +8,11 @@ export function getStats(game) {
 
 function getResults(game) {
   return Array.from({length: game.rules.challenges}, (_, i) =>
-    getResult(game.result.stats[i])
+    getResult(game.answers[i])
   ).join(` `);
 }
 
-function getResult(stat) {
-  const result = stat && stat.result || `unknown`;
+function getResult(answer) {
+  const result = (answer && getAnswerRank(answer)) || `unknown`;
   return `<li class="stats__result stats__result--${result}"></li>`;
 }

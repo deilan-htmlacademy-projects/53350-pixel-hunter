@@ -1,11 +1,11 @@
 import {CircularIndexer} from "./utils/circular-indexer";
-import {Screen} from "./screens/common/screen";
 
-const Slider = function (container, screens) {
+const Slider = function (container, screens, game) {
   verifyContainer(container);
-  verifyScreens(screens);
+  // verifyScreens(screens);
+  this.game = game;
   this.container = container;
-  this.screens = this.initScreens(screens);
+  this.screens = screens;
   this.indexer = new CircularIndexer(this.screens.length);
 };
 Slider.prototype.select = function (index) {
@@ -22,15 +22,20 @@ Slider.prototype.reset = function () {
 };
 Slider.prototype._select = function (index) {
   this.container.innerHTML = ``;
-  this.container.appendChild(this.screens[index].view);
+  const screen = this.screens[index](this.game);
+  this.initScreen(screen);
+  this.container.appendChild(screen.view);
 };
-Slider.prototype.initScreens = function (screens) {
-  for (let screen of screens) {
-    screen.prev.on(this.prev.bind(this));
-    screen.next.on(this.next.bind(this));
-    screen.reset.on(this.reset.bind(this));
-  }
-  return screens;
+Slider.prototype.initScreen = function (screen) {
+  screen.prev.on(this.prev.bind(this));
+  screen.next.on(() => {
+    if (this.game.state.lives > 0) {
+      this.next();
+    } else {
+      this._select(this.screens.length - 1);
+    }
+  });
+  screen.reset.on(this.reset.bind(this));
 };
 
 function verifyContainer(container) {
@@ -39,16 +44,16 @@ function verifyContainer(container) {
   }
 }
 
-function verifyScreens(screens) {
-  if (!Array.isArray(screens)) {
-    throw new Error(`screens must be an array of ${Screen.name}`);
-  }
-  if (screens.length === 0) {
-    throw new Error(`screens must contain at least one item`);
-  }
-  if (!screens.every((st) => st instanceof Screen)) {
-    throw new Error(`screens items must be instances of ${Screen.name}`);
-  }
-}
+// function verifyScreens(screens) {
+//   if (!Array.isArray(screens)) {
+//     throw new Error(`screens must be an array of ${Screen.name}`);
+//   }
+//   if (screens.length === 0) {
+//     throw new Error(`screens must contain at least one item`);
+//   }
+//   if (!screens.every((st) => st instanceof Screen)) {
+//     throw new Error(`screens items must be instances of ${Screen.name}`);
+//   }
+// }
 
 export {Slider};

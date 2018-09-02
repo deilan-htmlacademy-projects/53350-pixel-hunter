@@ -1,5 +1,5 @@
 import {getHeader} from "./header";
-import {getStats} from "./stats-current";
+import {getStats} from "./stats";
 
 // Общая статистика по всем игрокам
 export function getResult(game) {
@@ -17,32 +17,32 @@ function getResultTable(game) {
       <td colspan="2">
         ${getStats(game)}
       </td>
-      <td class="result__points">× ${game.result.pointsCorrect}</td>
-      <td class="result__total">${game.result.totalCorrect}</td>
+      <td class="result__points">× ${game.scoring.correctness}</td>
+      <td class="result__total">${game.score.correctness}</td>
     </tr>
     <tr>
       <td></td>
       <td class="result__extra">Бонус за скорость:</td>
       <td class="result__extra">${game.result.quick} <span class="stats__result stats__result--fast"></span></td>
-      <td class="result__points">× ${game.result.pointsQuick}</td>
-      <td class="result__total">${game.result.totalQuick}</td>
+      <td class="result__points">× ${game.scoring.quick}</td>
+      <td class="result__total">${game.score.quick}</td>
     </tr>
     <tr>
       <td></td>
       <td class="result__extra">Бонус за жизни:</td>
       <td class="result__extra">${game.result.lives} <span class="stats__result stats__result--alive"></span></td>
-      <td class="result__points">× ${game.result.pointsLives}</td>
-      <td class="result__total">${game.result.totalLives}</td>
+      <td class="result__points">× ${game.scoring.lives}</td>
+      <td class="result__total">${game.score.lives}</td>
     </tr>
     <tr>
       <td></td>
       <td class="result__extra">Штраф за медлительность:</td>
       <td class="result__extra">${game.result.slow} <span class="stats__result stats__result--slow"></span></td>
-      <td class="result__points">× ${game.result.pointsSlow}</td>
-      <td class="result__total">-${game.result.totalSlow}</td>
+      <td class="result__points">× ${game.scoring.slow}</td>
+      <td class="result__total">-${game.score.slow}</td>
     </tr>
     <tr>
-      <td colspan="5" class="result__total  result__total--final">${game.result.total}</td>
+      <td colspan="5" class="result__total result__total--final">${game.score.total}</td>
     </tr>
   </table>`;
 }

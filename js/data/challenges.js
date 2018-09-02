@@ -3,7 +3,7 @@ import {getRandomItem} from "../utils/random";
 
 export const IMAGE_TYPES = Object.freeze({
   PHOTO: `photo`,
-  PAINTING: `painting`
+  PAINTING: `paint`
 });
 
 export const CHALLENGE_TYPES = {
@@ -19,10 +19,12 @@ export function getAllChallenges() {
       task: `Угадай, фото или рисунок?`,
       options: [
         {
-          imageUrl: getRandomItem(images.photos),
-          title: `Option 1`,
-          width: 705,
-          height: 455,
+          image: {
+            url: getRandomItem(images.photos),
+            width: 705,
+            height: 455,
+            description: `Option 1`,
+          },
           type: IMAGE_TYPES.PHOTO
         }
       ]
@@ -32,17 +34,21 @@ export function getAllChallenges() {
       task: `Угадайте для каждого изображения фото или рисунок?`,
       options: [
         {
-          imageUrl: getRandomItem(images.photos),
-          title: `Option 1`,
-          width: 468,
-          height: 458,
+          image: {
+            url: getRandomItem(images.photos),
+            width: 468,
+            height: 458,
+            description: `Option 1`,
+          },
           type: IMAGE_TYPES.PHOTO
         },
         {
-          imageUrl: getRandomItem(images.paintings),
-          title: `Option 2`,
-          width: 468,
-          height: 458,
+          image: {
+            url: getRandomItem(images.paintings),
+            width: 468,
+            height: 458,
+            description: `Option 2`,
+          },
           type: IMAGE_TYPES.PAINTING
         }
       ]
@@ -52,40 +58,46 @@ export function getAllChallenges() {
       task: `Найдите рисунок среди изображений`,
       options: [
         {
-          imageUrl: getRandomItem(images.paintings),
-          title: `Option 1`,
-          width: 304,
-          height: 455,
+          image: {
+            url: getRandomItem(images.paintings),
+            width: 304,
+            height: 455,
+            description: `Option 1`,
+          },
           type: IMAGE_TYPES.PAINTING
         },
         {
-          imageUrl: getRandomItem(images.photos),
-          title: `Option 2`,
-          width: 304,
-          height: 455,
+          image: {
+            url: getRandomItem(images.photos),
+            width: 304,
+            height: 455,
+            description: `Option 2`,
+          },
           type: IMAGE_TYPES.PHOTO
         },
         {
-          imageUrl: getRandomItem(images.photos),
-          title: `Option 3`,
-          width: 304,
-          height: 455,
+          image: {
+            url: getRandomItem(images.photos),
+            width: 304,
+            height: 455,
+            description: `Option 3`,
+          },
           type: IMAGE_TYPES.PHOTO
         }
       ]
     },
-
     {
       type: CHALLENGE_TYPES.FIRST,
       task: `Угадай, фото или рисунок?`,
       options: [
         {
-          imageUrl: getRandomItem(images.photos),
-          title: `Option 1`,
-          width: 705,
-          height: 455,
-          type: IMAGE_TYPES.PHOTO,
-          answer: IMAGE_TYPES.PHOTO
+          image: {
+            url: getRandomItem(images.photos),
+            width: 705,
+            height: 455,
+            description: `Option 1`,
+          },
+          type: IMAGE_TYPES.PHOTO
         }
       ]
     },
@@ -94,17 +106,21 @@ export function getAllChallenges() {
       task: `Угадайте для каждого изображения фото или рисунок?`,
       options: [
         {
-          imageUrl: getRandomItem(images.photos),
-          title: `Option 1`,
-          width: 468,
-          height: 458,
+          image: {
+            url: getRandomItem(images.photos),
+            width: 468,
+            height: 458,
+            description: `Option 1`,
+          },
           type: IMAGE_TYPES.PHOTO
         },
         {
-          imageUrl: getRandomItem(images.paintings),
-          title: `Option 2`,
-          width: 468,
-          height: 458,
+          image: {
+            url: getRandomItem(images.paintings),
+            width: 468,
+            height: 458,
+            description: `Option 2`,
+          },
           type: IMAGE_TYPES.PAINTING
         }
       ]
@@ -114,24 +130,30 @@ export function getAllChallenges() {
       task: `Найдите рисунок среди изображений`,
       options: [
         {
-          imageUrl: getRandomItem(images.paintings),
-          title: `Option 1`,
-          width: 304,
-          height: 455,
+          image: {
+            url: getRandomItem(images.paintings),
+            width: 304,
+            height: 455,
+            description: `Option 1`,
+          },
           type: IMAGE_TYPES.PAINTING
         },
         {
-          imageUrl: getRandomItem(images.photos),
-          title: `Option 2`,
-          width: 304,
-          height: 455,
+          image: {
+            url: getRandomItem(images.photos),
+            width: 304,
+            height: 455,
+            description: `Option 2`,
+          },
           type: IMAGE_TYPES.PHOTO
         },
         {
-          imageUrl: getRandomItem(images.photos),
-          title: `Option 3`,
-          width: 304,
-          height: 455,
+          image: {
+            url: getRandomItem(images.photos),
+            width: 304,
+            height: 455,
+            description: `Option 3`,
+          },
           type: IMAGE_TYPES.PHOTO
         }
       ]
@@ -141,12 +163,13 @@ export function getAllChallenges() {
       task: `Угадай, фото или рисунок?`,
       options: [
         {
-          imageUrl: getRandomItem(images.photos),
-          title: `Option 1`,
-          width: 705,
-          height: 455,
-          type: IMAGE_TYPES.PHOTO,
-          answer: IMAGE_TYPES.PHOTO
+          image: {
+            url: getRandomItem(images.photos),
+            width: 705,
+            height: 455,
+            description: `Option 1`,
+          },
+          type: IMAGE_TYPES.PHOTO
         }
       ]
     },
@@ -155,17 +178,21 @@ export function getAllChallenges() {
       task: `Угадайте для каждого изображения фото или рисунок?`,
       options: [
         {
-          imageUrl: getRandomItem(images.photos),
-          title: `Option 1`,
-          width: 468,
-          height: 458,
+          image: {
+            url: getRandomItem(images.photos),
+            width: 468,
+            height: 458,
+            description: `Option 1`,
+          },
           type: IMAGE_TYPES.PHOTO
         },
         {
-          imageUrl: getRandomItem(images.paintings),
-          title: `Option 2`,
-          width: 468,
-          height: 458,
+          image: {
+            url: getRandomItem(images.paintings),
+            width: 468,
+            height: 458,
+            description: `Option 2`,
+          },
           type: IMAGE_TYPES.PAINTING
         }
       ]
@@ -175,24 +202,30 @@ export function getAllChallenges() {
       task: `Найдите рисунок среди изображений`,
       options: [
         {
-          imageUrl: getRandomItem(images.paintings),
-          title: `Option 1`,
-          width: 304,
-          height: 455,
+          image: {
+            url: getRandomItem(images.paintings),
+            width: 304,
+            height: 455,
+            description: `Option 1`,
+          },
           type: IMAGE_TYPES.PAINTING
         },
         {
-          imageUrl: getRandomItem(images.photos),
-          title: `Option 2`,
-          width: 304,
-          height: 455,
+          image: {
+            url: getRandomItem(images.photos),
+            width: 304,
+            height: 455,
+            description: `Option 2`,
+          },
           type: IMAGE_TYPES.PHOTO
         },
         {
-          imageUrl: getRandomItem(images.photos),
-          title: `Option 3`,
-          width: 304,
-          height: 455,
+          image: {
+            url: getRandomItem(images.photos),
+            width: 304,
+            height: 455,
+            description: `Option 3`,
+          },
           type: IMAGE_TYPES.PHOTO
         }
       ]
@@ -202,71 +235,15 @@ export function getAllChallenges() {
       task: `Угадай, фото или рисунок?`,
       options: [
         {
-          imageUrl: getRandomItem(images.photos),
-          title: `Option 1`,
-          width: 705,
-          height: 455,
-          type: IMAGE_TYPES.PHOTO,
-          answer: IMAGE_TYPES.PHOTO
+          image: {
+            url: getRandomItem(images.photos),
+            width: 705,
+            height: 455,
+            description: `Option 1`,
+          },
+          type: IMAGE_TYPES.PHOTO
         }
       ]
     }
   ];
 }
-
-export const challenges = [
-  {
-    type: CHALLENGE_TYPES.THIRD,
-    task: `Найдите рисунок среди изображений`,
-    options: [
-      {
-        imageUrl: `http://placehold.it/304x455`,
-        title: `Option 1`,
-        width: 304,
-        height: 455
-      },
-      {
-        imageUrl: `http://placehold.it/304x455`,
-        title: `Option 2`,
-        width: 304,
-        height: 455
-      },
-      {
-        imageUrl: `http://placehold.it/304x455`,
-        title: `Option 3`,
-        width: 304,
-        height: 455
-      }
-    ]
-  },
-  {
-    type: CHALLENGE_TYPES.FIRST,
-    task: `Угадай, фото или рисунок?`,
-    options: [
-      {
-        imageUrl: `http://placehold.it/705x455`,
-        title: `Option 1`,
-        width: 705,
-        height: 455
-      }
-    ]
-  },
-  {
-    type: CHALLENGE_TYPES.SECOND,
-    task: `Угадайте для каждого изображения фото или рисунок?`,
-    options: [
-      {
-        imageUrl: `http://placehold.it/468x458`,
-        title: `Option 1`,
-        width: 468,
-        height: 458
-      },
-      {
-        imageUrl: `http://placehold.it/468x458`,
-        title: `Option 1`,
-        width: 468,
-        height: 458
-      }
-    ]
-  }
-];

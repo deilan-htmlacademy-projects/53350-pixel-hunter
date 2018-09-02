@@ -10,6 +10,7 @@ import {Slider} from "./slider";
 import {createPaginator} from "./utils/dom/paginator";
 import {createKeydownHandler} from "./utils/dom/keyboard";
 import {CHALLENGE_TYPES, getAllChallenges} from "./data/challenges";
+import {scoring} from "./data/scoring";
 
 const CHALLENGE_GAME_SCREEN_MAP = {
   [CHALLENGE_TYPES.FIRST]: Game1Screen,
@@ -17,22 +18,35 @@ const CHALLENGE_GAME_SCREEN_MAP = {
   [CHALLENGE_TYPES.THIRD]: Game3Screen
 };
 
-const INITIAL_GAME = Object.freeze({
+const INITIAL_GAME = {
   state: {
     lives: 3,
     time: 0
   },
   challenges: getAllChallenges(),
+  answers: [],
   result: {
-    title: `Победа!`,
-    stats: []
+    title: ``,
+    stats: [],
+    correctness: 0,
+    quick: 0,
+    lives: 0,
+    slow: 0
   },
+  score: {
+    correctness: 0,
+    quick: 0,
+    lives: 0,
+    slow: 0,
+    total: 0
+  },
+  scoring,
   rules: {
     challenges: 10,
     lives: 3,
     time: 30
   }
-});
+};
 
 const INITIAL_SLIDE = 0;
 
@@ -41,21 +55,21 @@ const KEY_CODES = Object.freeze({
   ARROW_RIGHT: `ArrowRight`
 });
 
-const gameScreens = INITIAL_GAME.challenges.map((challenge) => {
-  return new CHALLENGE_GAME_SCREEN_MAP[challenge.type](INITIAL_GAME, challenge);
+const gameScreens = getAllChallenges().map((challenge) => {
+  return (game) => new CHALLENGE_GAME_SCREEN_MAP[challenge.type](game, challenge);
 });
 
 const screens = [
-  new IntroScreen(INITIAL_GAME),
-  new GreetingScreen(INITIAL_GAME),
-  new RulesScreen(INITIAL_GAME),
+  (game) => new IntroScreen(game),
+  (game) => new GreetingScreen(game),
+  (game) => new RulesScreen(game),
   ...gameScreens,
-  new StatsScreen(INITIAL_GAME)
+  (game) => new StatsScreen(game)
 ];
 
 const mainEl = document.querySelector(`#main`);
 
-const slider = new Slider(mainEl, screens);
+const slider = new Slider(mainEl, screens, INITIAL_GAME);
 const prevHandler = slider.prev.bind(slider);
 const nextHandler = slider.next.bind(slider);
 

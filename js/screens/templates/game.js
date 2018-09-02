@@ -1,4 +1,4 @@
-import {getStats} from "./stats-current";
+import {getStats} from "./stats";
 import {getHeader} from "./header";
 
 export function getGame(game, content, {showState} = {showState: true}) {
