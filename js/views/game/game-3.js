@@ -1,13 +1,23 @@
-import {Screen} from "../common/screen";
 import {getGame} from "../templates/game";
 import {getGameChallenge3} from "../templates/game-3";
 import {IMAGE_TYPES} from "../../data/challenges";
 import {adjustLives} from "../../domain/answer";
+import ScreenView from "../common/screen";
 
-export class Game3Screen extends Screen {
+// Игровой экран с тремя изображениями
+export class Game3Screen extends ScreenView {
   constructor(game, challenge) {
-    super(getGame(game, getGameChallenge3(challenge)));
-    this.view
+    super();
+    this.game = game;
+    this.challenge = challenge;
+  }
+
+  get _template() {
+    return getGame(this.game, getGameChallenge3(this.challenge));
+  }
+
+  _bind(_element) {
+    _element
       .querySelector(`.game__content`)
       .addEventListener(`click`, (event) => {
         const target = event.target.closest(`.game__option`);
@@ -18,9 +28,9 @@ export class Game3Screen extends Screen {
           isCorrect: target.dataset.type === IMAGE_TYPES.PAINTING,
           time: 15
         };
-        game.answers.push(answer);
-        adjustLives(game, answer);
-        this.next.fire();
+        this.game.answers.push(answer);
+        adjustLives(this.game, answer);
+        this.nextEventEmitter.fire();
       });
   }
 }

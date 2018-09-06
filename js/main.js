@@ -1,10 +1,10 @@
-import {IntroScreen} from "./screens/intro";
-import {GreetingScreen} from "./screens/greeting";
-import {RulesScreen} from "./screens/rules";
-import {Game2Screen} from "./screens/game/game-2";
-import {Game1Screen} from "./screens/game/game-1";
-import {Game3Screen} from "./screens/game/game-3";
-import {StatsScreen} from "./screens/stats";
+import {IntroView} from "./views/intro";
+import {GreetingScreen} from "./views/greeting";
+import {RulesScreen} from "./views/rules";
+import {Game1Screen} from "./views/game/game-1";
+import {Game2Screen} from "./views/game/game-2";
+import {Game3Screen} from "./views/game/game-3";
+import {StatsScreen} from "./views/stats";
 
 import {Slider} from "./slider";
 import {createPaginator} from "./utils/dom/paginator";
@@ -60,7 +60,7 @@ const gameScreens = getAllChallenges().map((challenge) => {
 });
 
 const screens = [
-  (game) => new IntroScreen(game),
+  (game) => new IntroView(game),
   (game) => new GreetingScreen(game),
   (game) => new RulesScreen(game),
   ...gameScreens,

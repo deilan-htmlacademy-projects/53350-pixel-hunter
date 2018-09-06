@@ -1,7 +1,6 @@
 import {getHeader} from "./header";
 import {getStats} from "./stats";
 
-// Общая статистика по всем игрокам
 export function getResult(game) {
   return `${getHeader(game)}
   <section class="result">

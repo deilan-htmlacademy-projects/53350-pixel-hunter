@@ -1,4 +1,3 @@
-// Игровой экран с тремя изображениями
 export function getGameChallenge3(challenge) {
   return `<p class="game__task">${challenge.task}</p>
   <form class="game__content game__content--triple">

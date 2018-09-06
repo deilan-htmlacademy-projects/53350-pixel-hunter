@@ -23,18 +23,18 @@ Slider.prototype._select = function (index) {
   this.container.innerHTML = ``;
   const screen = this.screens[index](this.game);
   this.initScreen(screen);
-  this.container.appendChild(screen.view);
+  this.container.appendChild(screen.element);
 };
 Slider.prototype.initScreen = function (screen) {
-  screen.prev.on(this.prev.bind(this));
-  screen.next.on(() => {
+  screen.prevEventEmitter.on(this.prev.bind(this));
+  screen.nextEventEmitter.on(() => {
     if (this.game.state.lives > 0) {
       this.next();
     } else {
       this._select(this.screens.length - 1);
     }
   });
-  screen.reset.on(this.reset.bind(this));
+  screen.resetEventEmitter.on(this.reset.bind(this));
 };
 
 function verifyContainer(container) {

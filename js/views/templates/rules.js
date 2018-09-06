@@ -1,6 +1,6 @@
 import {getHeader} from "./header";
 
-// Правила игры
+
 export function getRules(rules) {
   return `${getHeader()}
   <section class="rules">

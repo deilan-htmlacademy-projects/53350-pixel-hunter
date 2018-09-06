@@ -1,12 +1,22 @@
-import {Screen} from "../common/screen";
+import ScreenView from "../common/screen";
 import {getGame} from "../templates/game";
 import {getGameChallenge2} from "../templates/game-2";
 import {adjustLives} from "../../domain/answer";
 
-export class Game2Screen extends Screen {
+// Игровой экран с двумя изображениями
+export class Game2Screen extends ScreenView {
   constructor(game, challenge) {
-    super(getGame(game, getGameChallenge2(challenge)));
-    this.view
+    super();
+    this.game = game;
+    this.challenge = challenge;
+  }
+
+  get _template() {
+    return getGame(this.game, getGameChallenge2(this.challenge));
+  }
+
+  _bind(_element) {
+    _element
       .querySelector(`.game__content`)
       .addEventListener(`input`, (event) => {
         if (
@@ -15,21 +25,21 @@ export class Game2Screen extends Screen {
         ) {
           return;
         }
-        const choices = this._getChoices(challenge);
-        if (choices.length === challenge.options.length) {
+        const choices = this._getChoices(_element, this.challenge);
+        if (choices.length === this.challenge.options.length) {
           const answer = {
             isCorrect: choices.every((choice) => choice),
             time: 15
           };
-          game.answers.push(answer);
-          adjustLives(game, answer);
-          this.next.fire();
+          this.game.answers.push(answer);
+          adjustLives(this.game, answer);
+          this.nextEventEmitter.fire();
         }
       });
   }
 
-  _getChoices(challenge) {
-    const gameOptions = Array.from(this.view.querySelectorAll(`.game__option`));
+  _getChoices(element, challenge) {
+    const gameOptions = Array.from(element.querySelectorAll(`.game__option`));
     return gameOptions.reduce((acc, gameOption, index) => {
       const choice = gameOption.querySelector(`input[type=radio]:checked`);
       if (choice) {

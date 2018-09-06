@@ -1,8 +1,7 @@
-// Игровой экран с одним изображением
-export function getGameChallenge1(challenge) {
+export function getGameChallenge2(challenge) {
   return `<p class="game__task">${challenge.task}</p>
-  <form class="game__content game__content--wide">
-    ${getOption(challenge.options[0].image, 0)}
+  <form class="game__content">
+    ${challenge.options.map((option, index) => getOption(option.image, index)).join(` `)}
   </form>`;
 }
 
