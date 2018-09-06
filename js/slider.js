@@ -2,7 +2,6 @@ import {CircularIndexer} from "./utils/circular-indexer";
 
 const Slider = function (container, screens, game) {
   verifyContainer(container);
-  // verifyScreens(screens);
   this.game = game;
   this.container = container;
   this.screens = screens;
@@ -43,17 +42,5 @@ function verifyContainer(container) {
     throw new Error(`container must be an ${HTMLElement.name}`);
   }
 }
-
-// function verifyScreens(screens) {
-//   if (!Array.isArray(screens)) {
-//     throw new Error(`screens must be an array of ${Screen.name}`);
-//   }
-//   if (screens.length === 0) {
-//     throw new Error(`screens must contain at least one item`);
-//   }
-//   if (!screens.every((st) => st instanceof Screen)) {
-//     throw new Error(`screens items must be instances of ${Screen.name}`);
-//   }
-// }
 
 export {Slider};

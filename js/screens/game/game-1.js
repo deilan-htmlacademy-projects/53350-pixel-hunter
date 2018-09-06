@@ -15,21 +15,14 @@ export class Game1Screen extends Screen {
         ) {
           return;
         }
-        const input = this._getInput();
-        if (input) {
-          const isCorrect = challenge.options[0].type === input.value;
-          const answer = {
-            isCorrect,
-            time: 15
-          };
-          game.answers.push(answer);
-          adjustLives(game, answer);
-          this.next.fire();
-        }
+        const isCorrect = challenge.options[0].type === event.target.value;
+        const answer = {
+          isCorrect,
+          time: 15
+        };
+        game.answers.push(answer);
+        adjustLives(game, answer);
+        this.next.fire();
       });
-  }
-
-  _getInput() {
-    return this.view.querySelector(`.game__option input[type=radio]:checked`);
   }
 }
