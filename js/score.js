@@ -1,3 +1,5 @@
+import {ANSWER_RANK} from "./domain/answer-rank";
+
 const CORRECTNESS_SCORE = Object.freeze({
   INCORRECT: 0,
   CORRECT: 100
@@ -17,6 +19,19 @@ const SPEED_TIME = Object.freeze({
   SLOW: 20,
   QUICK: 10
 });
+
+export function getAnswerRank(answer) {
+  if (!answer.isCorrect) {
+    return ANSWER_RANK.WRONG;
+  }
+  if (answer.time < SPEED_TIME.QUICK) {
+    return ANSWER_RANK.QUICK;
+  }
+  if (answer.time > SPEED_TIME.SLOW) {
+    return ANSWER_RANK.SLOW;
+  }
+  return ANSWER_RANK.CORRECT;
+}
 
 export function calculateScore(answers, livesCount) {
   verifyAnswers(answers);

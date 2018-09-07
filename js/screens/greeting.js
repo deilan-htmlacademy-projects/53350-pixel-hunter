@@ -1,4 +1,4 @@
-import {Screen} from "./screen";
+import {Screen} from "./common/screen";
 
 // Приветствие
 const template = `<section class="greeting central--blur">

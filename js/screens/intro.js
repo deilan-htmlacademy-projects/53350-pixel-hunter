@@ -1,4 +1,4 @@
-import {Screen} from "./screen";
+import {Screen} from "./common/screen";
 
 // Интро
 const template = `<section class="intro">
