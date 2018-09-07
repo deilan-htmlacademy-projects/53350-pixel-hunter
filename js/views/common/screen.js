@@ -5,7 +5,7 @@ export default class ScreenView extends AbstractView {
   constructor() {
     if (new.target === ScreenView) {
       throw new Error(
-          `Could not instantiate an AbstractView.` +
+          `Could not instantiate an ScreenView.` +
           ` Instantiate a concrete subclass instead.`
       );
     }
@@ -18,7 +18,9 @@ export default class ScreenView extends AbstractView {
   _bind(_element) {
     const backBtn = _element.querySelector(`.back`);
     if (backBtn) {
-      backBtn.addEventListener(`click`, () => this.resetEventEmitter.fire());
+      backBtn.addEventListener(`click`, () => {
+        this.resetEventEmitter.fire();
+      });
     }
   }
 }

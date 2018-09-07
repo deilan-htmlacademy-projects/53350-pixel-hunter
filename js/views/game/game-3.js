@@ -1,15 +1,16 @@
 import {getGame} from "../templates/game";
 import {getGameChallenge3} from "../templates/game-3";
 import {IMAGE_TYPES} from "../../data/challenges";
-import {adjustLives} from "../../domain/answer";
 import ScreenView from "../common/screen";
+import EventEmitter from "../../utils/event-emitter";
 
 // Игровой экран с тремя изображениями
-export class Game3Screen extends ScreenView {
+export class Game3View extends ScreenView {
   constructor(game, challenge) {
     super();
     this.game = game;
     this.challenge = challenge;
+    this.answerEventEmitter = new EventEmitter();
   }
 
   get _template() {
@@ -17,6 +18,7 @@ export class Game3Screen extends ScreenView {
   }
 
   _bind(_element) {
+    super._bind(_element);
     _element
       .querySelector(`.game__content`)
       .addEventListener(`click`, (event) => {
@@ -24,13 +26,26 @@ export class Game3Screen extends ScreenView {
         if (!target) {
           return;
         }
+        const gameOptions = this._getCheckedInputs();
+        const answerIndex = gameOptions.indexOf(target);
+        if (answerIndex === -1) {
+          throw new Error(`game option doesn't exist`);
+        }
+        const options = Array.from(
+            {length: this.challenge.options.length},
+            () => IMAGE_TYPES.PHOTO
+        );
+        options[answerIndex] = IMAGE_TYPES.PAINTING;
         const answer = {
-          isCorrect: target.dataset.type === IMAGE_TYPES.PAINTING,
+          id: this.challenge.id,
+          options,
           time: 15
         };
-        this.game.answers.push(answer);
-        adjustLives(this.game, answer);
-        this.nextEventEmitter.fire();
+        this.answerEventEmitter.fire(answer);
       });
+  }
+
+  _getCheckedInputs() {
+    return Array.from(this.element.querySelectorAll(`.game__option`));
   }
 }

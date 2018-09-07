@@ -21,9 +21,9 @@ export default class Slider {
     this._select(this.indexer.set(0));
   }
   _select(index) {
-    this.container.innerHTML = ``;
     const screen = this.screens[index](this.game);
     this.initScreen(screen);
+    this.container.innerHTML = ``;
     this.container.appendChild(screen.element);
   }
   initScreen(screen) {

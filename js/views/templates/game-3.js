@@ -6,7 +6,7 @@ export function getGameChallenge3(challenge) {
 }
 
 function getOption(option) {
-  return `<div class="game__option" data-type="${option.type}">
+  return `<div class="game__option">
     <img src="${option.image.url}"
       alt="${option.image.description}"
       width="${option.image.width}"

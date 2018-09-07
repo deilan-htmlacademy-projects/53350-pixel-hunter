@@ -1,7 +1,7 @@
 import ScreenView from "./common/screen";
 
 // Модальное окно с ошибкой
-export class ModalErrorScreen extends ScreenView {
+export class ModalErrorView extends ScreenView {
   get _template() {
     return `<section class="modal">
       <div class="modal__inner">

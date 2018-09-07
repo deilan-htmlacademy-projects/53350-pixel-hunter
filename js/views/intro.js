@@ -14,6 +14,7 @@ export class IntroView extends ScreenView {
   }
 
   _bind(_element) {
+    super._bind(_element);
     _element
       .querySelector(`.intro__asterisk`)
       .addEventListener(`click`, () => this.nextEventEmitter.fire());

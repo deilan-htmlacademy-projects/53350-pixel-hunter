@@ -1,14 +1,15 @@
 import ScreenView from "../common/screen";
 import {getGame} from "../templates/game";
 import {getGameChallenge1} from "../templates/game-1";
-import {adjustLives} from "../../domain/answer";
+import EventEmitter from "../../utils/event-emitter";
 
 // Игровой экран с одним изображением
-export class Game1Screen extends ScreenView {
+export class Game1View extends ScreenView {
   constructor(game, challenge) {
     super();
     this.game = game;
     this.challenge = challenge;
+    this.answerEventEmitter = new EventEmitter();
   }
 
   get _template() {
@@ -16,23 +17,19 @@ export class Game1Screen extends ScreenView {
   }
 
   _bind(_element) {
+    super._bind(_element);
     _element
       .querySelector(`.game__content`)
       .addEventListener(`input`, (event) => {
-        if (
-          event.target.tagName !== `INPUT` ||
-          !event.currentTarget.contains(event.target)
-        ) {
+        if (event.target.tagName !== `INPUT`) {
           return;
         }
-        const isCorrect = this.challenge.options[0].type === event.target.value;
         const answer = {
-          isCorrect,
+          id: this.challenge.id,
+          options: [event.target.value],
           time: 15
         };
-        this.game.answers.push(answer);
-        adjustLives(this.game, answer);
-        this.nextEventEmitter.fire();
+        this.answerEventEmitter.fire(answer);
       });
   }
 }

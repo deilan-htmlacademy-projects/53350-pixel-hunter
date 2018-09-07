@@ -1,7 +1,7 @@
 import ScreenView from "./common/screen";
 
 // Приветствие
-export class GreetingScreen extends ScreenView {
+export class GreetingView extends ScreenView {
   get _template() {
     return `<section class="greeting central--blur">
       <img class="greeting__logo" src="img/logo_ph-big.svg" width="201" height="89" alt="Pixel Hunter">
@@ -26,6 +26,7 @@ export class GreetingScreen extends ScreenView {
   }
 
   _bind(_element) {
+    super._bind(_element);
     _element
       .querySelector(`.greeting__continue`)
       .addEventListener(`click`, () => this.nextEventEmitter.fire());

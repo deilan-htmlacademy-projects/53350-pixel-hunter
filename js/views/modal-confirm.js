@@ -2,7 +2,7 @@ import ScreenView from "./common/screen";
 import EventEmitter from "../utils/event-emitter";
 
 // Модальное окно с подтверждением
-export class ModalConfirmScreen extends ScreenView {
+export class ModalConfirmView extends ScreenView {
   constructor() {
     super();
     this.confirmEventEmitter = new EventEmitter();
@@ -30,6 +30,7 @@ export class ModalConfirmScreen extends ScreenView {
   }
 
   _bind(_element) {
+    super._bind(_element);
     _element
       .querySelector(`.modal__inner`)
       .addEventListener(`click`, (event) => {
