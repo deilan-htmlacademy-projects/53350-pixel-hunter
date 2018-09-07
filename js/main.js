@@ -6,7 +6,7 @@ import {Game2Screen} from "./views/game/game-2";
 import {Game3Screen} from "./views/game/game-3";
 import {StatsScreen} from "./views/stats";
 
-import {Slider} from "./slider";
+import Slider from "./slider";
 import {createPaginator} from "./utils/dom/paginator";
 import {createKeydownHandler} from "./utils/dom/keyboard";
 import {CHALLENGE_TYPES, getAllChallenges} from "./data/challenges";
