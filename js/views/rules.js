@@ -34,6 +34,7 @@ export class RulesView extends ScreenView {
 
   _bind(_element) {
     super._bind(_element);
+
     const nameInput = _element.querySelector(`.rules__input`);
     const submitBtn = _element.querySelector(`.rules__button`);
     const form = _element.querySelector(`.rules__form`);

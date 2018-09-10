@@ -11,8 +11,4 @@ export class StatsView extends ScreenView {
   get _template() {
     return getResult(this.game);
   }
-
-  _bind(_element) {
-    super._bind(_element);
-  }
 }
