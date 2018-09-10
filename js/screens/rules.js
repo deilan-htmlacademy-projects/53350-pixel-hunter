@@ -7,7 +7,7 @@ export default class RulesScreen {
     this.view = new RulesView(this.game);
 
     this.view.eventEmitter.on(`submit`, ({name}) => {
-      this.game.name = name;
+      this.game.playerName = name;
       App.showGame();
     });
 

@@ -11,7 +11,7 @@ export default class Game {
   }
 
   constructor(rules, challenges, scoring) {
-    this._name = ``;
+    this._playerName = ``;
     this.rules = rules;
     this.challenges = challenges;
     this.scoring = scoring;
@@ -33,12 +33,12 @@ export default class Game {
     };
   }
 
-  get name() {
-    return this._name;
+  get playerName() {
+    return this._playerName;
   }
 
-  set name(value) {
-    this._name = value;
+  set playerName(value) {
+    this._playerName = value;
   }
 
   die() {
