@@ -30,6 +30,6 @@ export class GreetingView extends ScreenView {
 
     _element
       .querySelector(`.greeting__continue`)
-      .addEventListener(`click`, () => this.nextEventEmitter.fire());
+      .addEventListener(`click`, () => this.eventEmitter.fire(`next`));
   }
 }

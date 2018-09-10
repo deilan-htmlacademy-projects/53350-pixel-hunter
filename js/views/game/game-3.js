@@ -10,7 +10,7 @@ export class Game3View extends ScreenView {
     super();
     this.game = game;
     this.challenge = challenge;
-    this.answerEventEmitter = new EventEmitter();
+    this.eventEmitter = new EventEmitter();
   }
 
   get _template() {
@@ -49,7 +49,7 @@ export class Game3View extends ScreenView {
           time: 15
         };
 
-        this.answerEventEmitter.fire(answer);
+        this.eventEmitter.fire(`answer`, answer);
       });
   }
 

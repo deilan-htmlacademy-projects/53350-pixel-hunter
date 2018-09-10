@@ -7,7 +7,7 @@ export class RulesView extends ScreenView {
   constructor(game) {
     super();
     this.game = game;
-    this.nameInputEventEmitter = new EventEmitter();
+    this.eventEmitter = new EventEmitter();
   }
 
   get _template() {
@@ -44,8 +44,10 @@ export class RulesView extends ScreenView {
 
     form.addEventListener(`submit`, (evt) => {
       evt.preventDefault();
-      this.nameInputEventEmitter.fire(nameInput.value.trim());
-      this.nextEventEmitter.fire();
+
+      this.eventEmitter.fire(`submit`, {
+        name: nameInput.value.trim()
+      });
     });
   }
 }

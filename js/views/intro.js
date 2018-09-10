@@ -18,6 +18,6 @@ export class IntroView extends ScreenView {
 
     _element
       .querySelector(`.intro__asterisk`)
-      .addEventListener(`click`, () => this.nextEventEmitter.fire());
+      .addEventListener(`click`, () => this.eventEmitter.fire(`next`));
   }
 }

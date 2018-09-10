@@ -4,7 +4,7 @@ import EventEmitter from "../../utils/event-emitter";
 export default class BackButtonView extends AbstractView {
   constructor() {
     super();
-    this.clickEventEmitter = new EventEmitter();
+    this.eventEmitter = new EventEmitter();
   }
 
   get _template() {
@@ -20,6 +20,6 @@ export default class BackButtonView extends AbstractView {
   }
 
   _bind(_element) {
-    _element.addEventListener(`click`, () => this.clickEventEmitter.fire());
+    _element.addEventListener(`click`, () => this.eventEmitter.fire(`click`));
   }
 }

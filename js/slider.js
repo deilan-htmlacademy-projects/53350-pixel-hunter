@@ -33,9 +33,9 @@ export default class Slider {
   }
 
   initScreen(screen) {
-    screen.prevEventEmitter.on(this.prev.bind(this));
+    screen.eventEmitter.on(`prev`, () => this.prev());
 
-    screen.nextEventEmitter.on(() => {
+    screen.eventEmitter.on(`next`, () => {
       if (this.game.state.lives > 0) {
         this.next();
       } else {
@@ -43,7 +43,7 @@ export default class Slider {
       }
     });
 
-    screen.resetEventEmitter.on(this.reset.bind(this));
+    screen.eventEmitter.on(`reset`, () => this.reset());
   }
 }
 

@@ -6,15 +6,12 @@ export default class RulesScreen {
     this.game = game;
     this.view = new RulesView(this.game);
 
-    this.view.nameInputEventEmitter.on((name) => {
+    this.view.eventEmitter.on(`submit`, ({name}) => {
       this.game.name = name;
-    });
-
-    this.view.nextEventEmitter.on(() => {
       App.showGame();
     });
 
-    this.view.resetEventEmitter.on(() => {
+    this.view.eventEmitter.on(`reset`, () => {
       App.showIntro();
     });
   }

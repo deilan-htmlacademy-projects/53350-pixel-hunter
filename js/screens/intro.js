@@ -5,6 +5,6 @@ export default class IntroScreen {
   constructor(game) {
     this.game = game;
     this.view = new IntroView();
-    this.view.nextEventEmitter.on(() => App.showGreeting());
+    this.view.eventEmitter.on(`next`, () => App.showGreeting());
   }
 }

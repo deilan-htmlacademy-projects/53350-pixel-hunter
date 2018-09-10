@@ -20,7 +20,7 @@ export default class GameScreen {
         challenge
     );
 
-    this.view.answerEventEmitter.on((answer) => {
+    this.view.eventEmitter.on(`answer`, (answer) => {
       this.game.setAnswer(answer);
 
       if (this.game.isOver()) {
@@ -30,7 +30,7 @@ export default class GameScreen {
       }
     });
 
-    this.view.resetEventEmitter.on(() => {
+    this.view.eventEmitter.on(`reset`, () => {
       App.showIntro();
     });
   }

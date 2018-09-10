@@ -1,22 +1,52 @@
 export default class EventEmitter {
   constructor() {
-    this._handlers = new Set();
+    this._handlers = new Map();
   }
 
-  on(handler) {
+  on(eventType, handler) {
+    verifyEventType(eventType);
     verifyHandler(handler);
-    this._handlers.add(handler);
+
+    let eventTypeHandlers = this._handlers.get(eventType);
+    if (!eventTypeHandlers) {
+      eventTypeHandlers = new Set();
+      this._handlers.set(eventType, eventTypeHandlers);
+    }
+    eventTypeHandlers.add(handler);
   }
 
-  remove(handler) {
+  remove(eventType, handler) {
+    verifyEventType(eventType);
     verifyHandler(handler);
-    this._handlers.clear(handler);
+
+    const eventTypeHandlers = this._handlers.get(eventType);
+    if (!eventTypeHandlers) {
+      return;
+    }
+
+    eventTypeHandlers.delete(handler);
+    if (eventTypeHandlers.size === 0) {
+      this._handlers.delete(eventType);
+    }
   }
 
-  fire(...args) {
-    for (const handler of this._handlers) {
+  fire(eventType, ...args) {
+    verifyEventType(eventType);
+
+    const eventTypeHandlers = this._handlers.get(eventType);
+    if (!eventTypeHandlers) {
+      return;
+    }
+
+    for (const handler of eventTypeHandlers) {
       handler(...args);
     }
+  }
+}
+
+function verifyEventType(eventType) {
+  if (typeof eventType !== `string` && !(eventType instanceof String)) {
+    throw new Error(`eventType must be a function`);
   }
 }
 
