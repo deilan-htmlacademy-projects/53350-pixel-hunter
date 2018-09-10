@@ -14,15 +14,22 @@ export default class GameScreen {
   constructor(game, challengeId) {
     this.game = game;
     const challenge = this.game.challenges[challengeId - 1];
-    this.view = new CHALLENGE_GAME_SCREEN_MAP[challenge.type](this.game, challenge);
+
+    this.view = new CHALLENGE_GAME_SCREEN_MAP[challenge.type](
+        this.game,
+        challenge
+    );
+
     this.view.answerEventEmitter.on((answer) => {
       this.game.setAnswer(answer);
+
       if (this.game.isOver()) {
         App.showStats();
       } else {
         App.showGame(challengeId + 1);
       }
     });
+
     this.view.resetEventEmitter.on(() => {
       App.showIntro();
     });

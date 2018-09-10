@@ -15,7 +15,9 @@ export class RulesView extends ScreenView {
     <section class="rules">
       <h2 class="rules__title">Правила</h2>
       <ul class="rules__description">
-        <li>Угадай ${this.game.rules.challenges} раз для каждого изображения фото
+        <li>Угадай ${
+  this.game.rules.challenges
+} раз для каждого изображения фото
           <img class="rules__icon" src="img/icon-photo.png" width="32" height="31" alt="Фото"> или рисунок
           <img class="rules__icon" src="img/icon-paint.png" width="32" height="31" alt="Рисунок"></li>
         <li>Фотографиями или рисунками могут быть оба изображения.</li>
@@ -35,9 +37,11 @@ export class RulesView extends ScreenView {
     const nameInput = _element.querySelector(`.rules__input`);
     const submitBtn = _element.querySelector(`.rules__button`);
     const form = _element.querySelector(`.rules__form`);
+
     nameInput.addEventListener(`input`, (evt) => {
       submitBtn.disabled = !evt.target.value;
     });
+
     form.addEventListener(`submit`, (evt) => {
       evt.preventDefault();
       this.nameInputEventEmitter.fire(nameInput.value.trim());

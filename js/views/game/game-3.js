@@ -19,28 +19,36 @@ export class Game3View extends ScreenView {
 
   _bind(_element) {
     super._bind(_element);
+
     _element
       .querySelector(`.game__content`)
       .addEventListener(`click`, (event) => {
         const target = event.target.closest(`.game__option`);
+
         if (!target) {
           return;
         }
+
         const gameOptions = this._getCheckedInputs();
         const answerIndex = gameOptions.indexOf(target);
+
         if (answerIndex === -1) {
           throw new Error(`game option doesn't exist`);
         }
+
         const options = Array.from(
             {length: this.challenge.options.length},
             () => IMAGE_TYPES.PHOTO
         );
+
         options[answerIndex] = IMAGE_TYPES.PAINTING;
+
         const answer = {
           id: this.challenge.id,
           options,
           time: 15
         };
+
         this.answerEventEmitter.fire(answer);
       });
   }

@@ -7,11 +7,14 @@ export default class Game {
     this.rules = rules;
     this.challenges = challenges;
     this.scoring = scoring;
+
     this.state = {
       lives: rules.lives,
       time: 0
     };
+
     this.answers = [];
+
     this.result = {
       title: ``,
       stats: [],
@@ -35,7 +38,9 @@ export default class Game {
   }
 
   isOver() {
-    return this.state.lives <= 0 || this.challenges.length === this.answers.length;
+    return (
+      this.state.lives <= 0 || this.challenges.length === this.answers.length
+    );
   }
 
   setAnswer(answer) {
@@ -43,12 +48,14 @@ export default class Game {
     if (!challenge) {
       throw new Error(`challenge does not exist`);
     }
+
     const result = {
-      isCorrect: challenge.options.reduce((isCorrect, ch, index) => {
-        return isCorrect && answer.options[index] === ch.type;
+      isCorrect: challenge.options.reduce((isCorrect, c, index) => {
+        return isCorrect && answer.options[index] === c.type;
       }, true),
       time: answer.time
     };
+
     this.answers.push(result);
     this.adjustLives(result);
   }
@@ -64,15 +71,19 @@ export default class Game {
     this.result.stats = this.answers.map((answer) => ({
       result: getAnswerRank(answer)
     }));
+
     this.result.correctness = this.result.stats.filter(
         (stat) => stat.result === ANSWER_RANK.CORRECT
     ).length;
+
     this.result.quick = this.result.stats.filter(
         (stat) => stat.result === ANSWER_RANK.QUICK
     ).length;
+
     this.result.slow = this.result.stats.filter(
         (stat) => stat.result === ANSWER_RANK.SLOW
     ).length;
+
     this.result.lives = this.state.lives;
     this.result.title = this.result.lives > 0 ? `Победа!` : `Поражение!`;
   }

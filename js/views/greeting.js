@@ -27,6 +27,7 @@ export class GreetingView extends ScreenView {
 
   _bind(_element) {
     super._bind(_element);
+
     _element
       .querySelector(`.greeting__continue`)
       .addEventListener(`click`, () => this.nextEventEmitter.fire());

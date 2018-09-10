@@ -10,6 +10,7 @@ export default class App {
     this.container = container;
     this.game = game;
   }
+
   static showIntro() {
     this._renderScreen(new IntroScreen());
   }

@@ -18,17 +18,20 @@ export class Game1View extends ScreenView {
 
   _bind(_element) {
     super._bind(_element);
+
     _element
       .querySelector(`.game__content`)
       .addEventListener(`input`, (event) => {
         if (event.target.tagName !== `INPUT`) {
           return;
         }
+
         const answer = {
           id: this.challenge.id,
           options: [event.target.value],
           time: 15
         };
+
         this.answerEventEmitter.fire(answer);
       });
   }

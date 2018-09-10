@@ -6,6 +6,7 @@ export default class BackButtonView extends AbstractView {
     super();
     this.clickEventEmitter = new EventEmitter();
   }
+
   get _template() {
     return `<button class="back">
       <span class="visually-hidden">Вернуться к началу</span>

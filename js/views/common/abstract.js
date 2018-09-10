@@ -25,6 +25,7 @@ export default class AbstractView {
       this._element = this._render();
       this._bind(this._element);
     }
+
     return this._element;
   }
 }

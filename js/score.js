@@ -24,21 +24,26 @@ export function getAnswerRank(answer) {
   if (!answer.isCorrect) {
     return ANSWER_RANK.WRONG;
   }
+
   if (answer.time < SPEED_TIME.QUICK) {
     return ANSWER_RANK.QUICK;
   }
+
   if (answer.time > SPEED_TIME.SLOW) {
     return ANSWER_RANK.SLOW;
   }
+
   return ANSWER_RANK.CORRECT;
 }
 
 export function calculateScore(answers, livesCount) {
   verifyAnswers(answers);
   verifyLivesCount(livesCount);
+
   if (answers.length < MIN_ANSWERS_COUNT) {
     return SUB_MIN_ANSWERS_SCORE;
   }
+
   return calculateAnswerTotalScore(answers) + calculateLivesScore(livesCount);
 }
 

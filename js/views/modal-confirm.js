@@ -31,13 +31,16 @@ export class ModalConfirmView extends ScreenView {
 
   _bind(_element) {
     super._bind(_element);
+
     _element
       .querySelector(`.modal__inner`)
       .addEventListener(`click`, (event) => {
         const target = event.target.closest(`button`);
+
         if (!target || !target.dataset.action) {
           return;
         }
+
         this.map[target.dataset.action].fire();
       });
   }

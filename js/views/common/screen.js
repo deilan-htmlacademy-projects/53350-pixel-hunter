@@ -9,6 +9,7 @@ export default class ScreenView extends AbstractView {
           ` Instantiate a concrete subclass instead.`
       );
     }
+
     super();
     this.prevEventEmitter = new EventEmitter();
     this.nextEventEmitter = new EventEmitter();
@@ -17,6 +18,7 @@ export default class ScreenView extends AbstractView {
 
   _bind(_element) {
     const backBtn = _element.querySelector(`.back`);
+
     if (backBtn) {
       backBtn.addEventListener(`click`, () => {
         this.resetEventEmitter.fire();
