@@ -4,14 +4,15 @@ import GreetingScreen from "./screens/greeting";
 import StatsScreen from "./screens/stats";
 import RulesScreen from "./screens/rules";
 import GameScreen from "./screens/game";
+import Game from "./domain/game";
 
 export default class App {
-  static init(container, game) {
-    this.container = container;
-    this.game = game;
+  static init(containerElement) {
+    this.containerElement = containerElement;
   }
 
   static showIntro() {
+    this.game = Game.create();
     this._renderScreen(new IntroScreen());
   }
 
@@ -32,6 +33,6 @@ export default class App {
   }
 
   static _renderScreen(screen) {
-    render(this.container, screen.view.element);
+    render(this.containerElement, screen.view.element);
   }
 }

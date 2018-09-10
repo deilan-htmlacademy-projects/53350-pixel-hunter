@@ -1,7 +1,15 @@
 import {getAnswerRank} from "../score";
 import {ANSWER_RANK} from "./answer-rank";
 
+import {getAllChallenges} from "../data/challenges";
+import {SCORING} from "../data/scoring";
+import {RULES} from "../data/rules";
+
 export default class Game {
+  static create() {
+    return new Game(RULES, getAllChallenges(), SCORING);
+  }
+
   constructor(rules, challenges, scoring) {
     this._name = ``;
     this.rules = rules;
