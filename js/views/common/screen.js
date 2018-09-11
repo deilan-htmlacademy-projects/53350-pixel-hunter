@@ -14,6 +14,13 @@ export default class ScreenView extends AbstractView {
     this.eventEmitter = new EventEmitter();
   }
 
+  updateTime(time) {
+    const timer = this.element.querySelector(`.game__timer`);
+    if (timer) {
+      timer.textContent = time;
+    }
+  }
+
   _bind(_element) {
     const backBtn = _element.querySelector(`.back`);
 

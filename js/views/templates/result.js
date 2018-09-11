@@ -56,7 +56,7 @@ function getSlow(game) {
     <td class="result__extra">Штраф за медлительность:</td>
     <td class="result__extra">${game.result.slow} <span class="stats__result stats__result--slow"></span></td>
     <td class="result__points">× ${game.scoring.slow}</td>
-    <td class="result__total">-${game.score.slow}</td>
+    <td class="result__total">${game.score.slow}</td>
   </tr>`;
 }
 

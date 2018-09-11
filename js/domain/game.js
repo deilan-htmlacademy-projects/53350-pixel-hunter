@@ -33,12 +33,20 @@ export default class Game {
     };
   }
 
+  tick() {
+    this.state.time++;
+  }
+
   get playerName() {
     return this._playerName;
   }
 
   set playerName(value) {
     this._playerName = value;
+  }
+
+  resetTime() {
+    this.state.time = 0;
   }
 
   die() {
@@ -58,14 +66,18 @@ export default class Game {
     }
 
     const result = {
-      isCorrect: challenge.options.reduce((isCorrect, c, index) => {
-        return isCorrect && answer.options[index] === c.type;
-      }, true),
+      isCorrect: Game.isAnswerCorrect(answer, challenge),
       time: answer.time
     };
 
     this.answers.push(result);
     this.adjustLives(result);
+  }
+
+  static isAnswerCorrect(answer, challenge) {
+    return challenge.options.every(
+        (option, index) => answer.options[index] === option.type
+    );
   }
 
   adjustLives(answer) {
@@ -81,7 +93,7 @@ export default class Game {
     }));
 
     this.result.correctness = this.result.stats.filter(
-        (stat) => stat.result === ANSWER_RANK.CORRECT
+        (stat) => stat.result !== ANSWER_RANK.WRONG
     ).length;
 
     this.result.quick = this.result.stats.filter(
