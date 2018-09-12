@@ -29,7 +29,7 @@ export class Game1View extends ScreenView {
         const answer = {
           id: this.challenge.id,
           options: [event.target.value],
-          time: 15
+          time: this.game.state.time
         };
 
         this.eventEmitter.fire(`answer`, answer);
