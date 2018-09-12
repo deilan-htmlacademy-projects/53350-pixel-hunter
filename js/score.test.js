@@ -6,6 +6,7 @@ describe(`Calculate score `, () => {
     const answers = [createAnswer(true, 10), createAnswer(true, 20)];
     assert.equal(calculateScore(answers, 1), -1);
   });
+
   it(`returns 1150 for 10 regular correct answers and 3 lives`, () => {
     const answers = [
       createAnswer(true, 11),
@@ -21,6 +22,7 @@ describe(`Calculate score `, () => {
     ];
     assert.equal(calculateScore(answers, 3), 1150);
   });
+
   it(`returns 1600 for 10 fast correct answers and 2 lives`, () => {
     const answers = [
       createAnswer(true, 1),
@@ -36,6 +38,7 @@ describe(`Calculate score `, () => {
     ];
     assert.equal(calculateScore(answers, 2), 1600);
   });
+
   it(`returns 550 for 10 slow correct answers and 1 lives`, () => {
     const answers = [
       createAnswer(true, 21),
@@ -51,6 +54,7 @@ describe(`Calculate score `, () => {
     ];
     assert.equal(calculateScore(answers, 1), 550);
   });
+
   it(`returns 850 for 2 fast, 3 regular and 5 slow correct answers and 0 lives`, () => {
     const answers = [
       createAnswer(true, 1),
@@ -66,6 +70,7 @@ describe(`Calculate score `, () => {
     ];
     assert.equal(calculateScore(answers, 0), 850);
   });
+
   it(`returns 850 for 5 regular correct and 5 incorrect answers and 3 lives`, () => {
     const answers = [
       createAnswer(true, 11),
@@ -81,6 +86,7 @@ describe(`Calculate score `, () => {
     ];
     assert.equal(calculateScore(answers, 3), 650);
   });
+
   it(`returns 2100 for 20 regular correct answers and 2 lives`, () => {
     const answers = [
       createAnswer(true, 11),
@@ -106,6 +112,7 @@ describe(`Calculate score `, () => {
     ];
     assert.equal(calculateScore(answers, 2), 2100);
   });
+
   it(`throws if answers is not an array of valid objects`, () => {
     assert.throws(() => calculateScore([undefined], 0));
     assert.throws(() => calculateScore([null], 1));

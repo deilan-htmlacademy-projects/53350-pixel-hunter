@@ -1,12 +1,15 @@
-import {Screen} from "./common/screen";
-import {getResult} from "./templates/result";
-import {getGameResult} from "../domain/game-result";
-import {getGameScore} from "../domain/game-score";
+import {StatsView} from "../views/stats";
+import App from "../app";
 
-export class StatsScreen extends Screen {
+export default class StatsScreen {
   constructor(game) {
-    game.result = getGameResult(game);
-    game.score = getGameScore(game);
-    super(getResult(game));
+    this.game = game;
+    this.game.getGameResult();
+    this.game.getGameScore();
+    this.view = new StatsView(this.game);
+
+    this.view.eventEmitter.on(`reset`, () => {
+      App.showIntro();
+    });
   }
 }

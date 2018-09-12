@@ -1,4 +1,21 @@
-export function getGameLives(game) {
+import {getBackButton} from "./back-button";
+
+export function getHeader(game, {showState} = {showState: false}) {
+  return `<header class="header">
+    ${getBackButton()}
+    ${showState ? getState(game) : ``}
+  </header>`;
+}
+
+function getState(game) {
+  return getGameTimer(game) + ` ` + getGameLives(game);
+}
+
+function getGameTimer(game) {
+  return `<div class="game__timer">${game.state.time}</div>`;
+}
+
+function getGameLives(game) {
   return `<div class="game__lives">
     ${getHearts(game)}
   </div>`;

@@ -15,6 +15,7 @@ export const CHALLENGE_TYPES = {
 export function getAllChallenges() {
   return [
     {
+      id: 1,
       type: CHALLENGE_TYPES.FIRST,
       task: `Угадай, фото или рисунок?`,
       options: [
@@ -30,6 +31,7 @@ export function getAllChallenges() {
       ]
     },
     {
+      id: 2,
       type: CHALLENGE_TYPES.SECOND,
       task: `Угадайте для каждого изображения фото или рисунок?`,
       options: [
@@ -54,6 +56,7 @@ export function getAllChallenges() {
       ]
     },
     {
+      id: 3,
       type: CHALLENGE_TYPES.THIRD,
       task: `Найдите рисунок среди изображений`,
       options: [
@@ -87,6 +90,7 @@ export function getAllChallenges() {
       ]
     },
     {
+      id: 4,
       type: CHALLENGE_TYPES.FIRST,
       task: `Угадай, фото или рисунок?`,
       options: [
@@ -102,6 +106,7 @@ export function getAllChallenges() {
       ]
     },
     {
+      id: 5,
       type: CHALLENGE_TYPES.SECOND,
       task: `Угадайте для каждого изображения фото или рисунок?`,
       options: [
@@ -126,6 +131,7 @@ export function getAllChallenges() {
       ]
     },
     {
+      id: 6,
       type: CHALLENGE_TYPES.THIRD,
       task: `Найдите рисунок среди изображений`,
       options: [
@@ -159,6 +165,7 @@ export function getAllChallenges() {
       ]
     },
     {
+      id: 7,
       type: CHALLENGE_TYPES.FIRST,
       task: `Угадай, фото или рисунок?`,
       options: [
@@ -174,6 +181,7 @@ export function getAllChallenges() {
       ]
     },
     {
+      id: 8,
       type: CHALLENGE_TYPES.SECOND,
       task: `Угадайте для каждого изображения фото или рисунок?`,
       options: [
@@ -198,6 +206,7 @@ export function getAllChallenges() {
       ]
     },
     {
+      id: 9,
       type: CHALLENGE_TYPES.THIRD,
       task: `Найдите рисунок среди изображений`,
       options: [
@@ -231,6 +240,7 @@ export function getAllChallenges() {
       ]
     },
     {
+      id: 10,
       type: CHALLENGE_TYPES.FIRST,
       task: `Угадай, фото или рисунок?`,
       options: [

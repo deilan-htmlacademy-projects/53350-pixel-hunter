@@ -1,4 +1,3 @@
-// Игровой экран с тремя изображениями
 export function getGameChallenge3(challenge) {
   return `<p class="game__task">${challenge.task}</p>
   <form class="game__content game__content--triple">
@@ -7,7 +6,7 @@ export function getGameChallenge3(challenge) {
 }
 
 function getOption(option) {
-  return `<div class="game__option" data-type="${option.type}">
+  return `<div class="game__option">
     <img src="${option.image.url}"
       alt="${option.image.description}"
       width="${option.image.width}"

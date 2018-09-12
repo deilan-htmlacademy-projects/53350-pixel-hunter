@@ -1,4 +1,4 @@
-export const scoring = Object.freeze({
+export const SCORING = Object.freeze({
   correctness: 100,
   lives: 50,
   quick: 50,

@@ -1,19 +1,18 @@
-import {Screen} from "./common/screen";
-import {getRules} from "./templates/rules";
+import App from "../app";
+import {RulesView} from "../views/rules";
 
-export class RulesScreen extends Screen {
+export default class RulesScreen {
   constructor(game) {
-    super(getRules(game.rules));
-    const rulesInput = this.view.querySelector(`.rules__input`);
-    const rulesBtn = this.view.querySelector(`.rules__button`);
-    const rulesForm = this.view.querySelector(`.rules__form`);
-    rulesInput.addEventListener(`input`, (evt) => {
-      rulesBtn.disabled = !evt.target.value;
+    this.game = game;
+    this.view = new RulesView(this.game);
+
+    this.view.eventEmitter.on(`submit`, ({name}) => {
+      this.game.playerName = name;
+      App.showGame();
     });
-    rulesForm.addEventListener(`submit`, (evt) => {
-      evt.preventDefault();
-      this.next.fire();
-      return false;
+
+    this.view.eventEmitter.on(`reset`, () => {
+      App.showIntro();
     });
   }
 }

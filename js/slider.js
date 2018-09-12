@@ -1,46 +1,54 @@
-import {CircularIndexer} from "./utils/circular-indexer";
+import CircularIndexer from "./utils/circular-indexer";
 
-const Slider = function (container, screens, game) {
-  verifyContainer(container);
-  this.game = game;
-  this.container = container;
-  this.screens = screens;
-  this.indexer = new CircularIndexer(this.screens.length);
-};
-Slider.prototype.select = function (index) {
-  this._select(this.indexer.set(index));
-};
-Slider.prototype.prev = function () {
-  this._select(this.indexer.prev());
-};
-Slider.prototype.next = function () {
-  this._select(this.indexer.next());
-};
-Slider.prototype.reset = function () {
-  this._select(this.indexer.set(0));
-};
-Slider.prototype._select = function (index) {
-  this.container.innerHTML = ``;
-  const screen = this.screens[index](this.game);
-  this.initScreen(screen);
-  this.container.appendChild(screen.view);
-};
-Slider.prototype.initScreen = function (screen) {
-  screen.prev.on(this.prev.bind(this));
-  screen.next.on(() => {
-    if (this.game.state.lives > 0) {
-      this.next();
-    } else {
-      this._select(this.screens.length - 1);
-    }
-  });
-  screen.reset.on(this.reset.bind(this));
-};
+export default class Slider {
+  constructor(container, screens, game) {
+    verifyContainer(container);
+    this.game = game;
+    this.container = container;
+    this.screens = screens;
+    this.indexer = new CircularIndexer(this.screens.length);
+  }
+
+  select(index) {
+    this._select(this.indexer.set(index));
+  }
+
+  prev() {
+    this._select(this.indexer.prev());
+  }
+
+  next() {
+    this._select(this.indexer.next());
+  }
+
+  reset() {
+    this._select(this.indexer.set(0));
+  }
+
+  _select(index) {
+    const screen = this.screens[index](this.game);
+    this.initScreen(screen);
+    this.container.innerHTML = ``;
+    this.container.appendChild(screen.element);
+  }
+
+  initScreen(screen) {
+    screen.eventEmitter.on(`prev`, () => this.prev());
+
+    screen.eventEmitter.on(`next`, () => {
+      if (this.game.state.lives > 0) {
+        this.next();
+      } else {
+        this._select(this.screens.length - 1);
+      }
+    });
+
+    screen.eventEmitter.on(`reset`, () => this.reset());
+  }
+}
 
 function verifyContainer(container) {
   if (!(container instanceof HTMLElement)) {
     throw new Error(`container must be an ${HTMLElement.name}`);
   }
 }
-
-export {Slider};

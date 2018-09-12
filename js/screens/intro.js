@@ -1,15 +1,10 @@
-import {Screen} from "./common/screen";
+import {IntroView} from "../views/intro";
+import App from "../app";
 
-// Интро
-const template = `<section class="intro">
-  <button class="intro__asterisk asterisk" type="button"><span class="visually-hidden">Продолжить</span>*</button>
-  <p class="intro__motto"><sup>*</sup> Это не фото. Это рисунок маслом нидерландского художника-фотореалиста Tjalf Sparnaay.</p>
-</section>`;
-
-export class IntroScreen extends Screen {
-  constructor() {
-    super(template);
-    const asterisk = this.view.querySelector(`.intro__asterisk`);
-    asterisk.addEventListener(`click`, () => this.next.fire());
+export default class IntroScreen {
+  constructor(game) {
+    this.game = game;
+    this.view = new IntroView();
+    this.view.eventEmitter.on(`next`, () => App.showGreeting());
   }
 }
