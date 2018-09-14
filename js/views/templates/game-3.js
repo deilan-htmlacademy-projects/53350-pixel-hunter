@@ -1,7 +1,7 @@
-export function getGameChallenge3(challenge) {
-  return `<p class="game__task">${challenge.task}</p>
+export function getGameQuestion3(question) {
+  return `<p class="game__task">${question.question}</p>
   <form class="game__content game__content--triple">
-    ${challenge.options.map((option) => getOption(option)).join(` `)}
+    ${question.answers.map((option) => getOption(option)).join(` `)}
   </form>`;
 }
 

@@ -24,8 +24,8 @@ export default class App {
     this._renderScreen(new RulesScreen(this.game));
   }
 
-  static showGame(challengeId = 1) {
-    this._renderScreen(new GameScreen(this.game, challengeId));
+  static showGame(questionId = 1) {
+    this._renderScreen(new GameScreen(this.game, questionId));
   }
 
   static showStats() {

@@ -1,19 +1,19 @@
 import ScreenView from "../common/screen";
 import {getGame} from "../templates/game";
-import {getGameChallenge2} from "../templates/game-2";
+import {getGameQuestion2} from "../templates/game-2";
 import EventEmitter from "../../utils/event-emitter";
 
 // Игровой экран с двумя изображениями
 export class Game2View extends ScreenView {
-  constructor(game, challenge) {
+  constructor(game, question) {
     super();
     this.game = game;
-    this.challenge = challenge;
+    this.question = question;
     this.eventEmitter = new EventEmitter();
   }
 
   get _template() {
-    return getGame(this.game, getGameChallenge2(this.challenge));
+    return getGame(this.game, getGameQuestion2(this.question));
   }
 
   _bind(_element) {
@@ -28,12 +28,12 @@ export class Game2View extends ScreenView {
 
         const inputs = this._getCheckedInputs();
 
-        if (inputs.length !== this.challenge.options.length) {
+        if (inputs.length !== this.question.answers.length) {
           return;
         }
 
         const answer = {
-          id: this.challenge.id,
+          id: this.question.id,
           options: inputs.map((input) => input.value),
           time: this.game.state.time
         };

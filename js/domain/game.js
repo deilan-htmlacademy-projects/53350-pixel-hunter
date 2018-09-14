@@ -1,19 +1,19 @@
 import {getAnswerRank} from "../score";
 import {ANSWER_RANK} from "./answer-rank";
 
-import {getAllChallenges} from "../data/challenges";
-import {SCORING} from "../data/scoring";
-import {RULES} from "../data/rules";
+import {getAllQuestions} from "../data/questions";
+import {defaultScoring} from "../data/scoring";
+import {defaultRules} from "../data/rules";
 
 export default class Game {
   static create() {
-    return new Game(RULES, getAllChallenges(), SCORING);
+    return new Game(defaultRules, getAllQuestions(), defaultScoring);
   }
 
-  constructor(rules, challenges, scoring) {
+  constructor(rules, questions, scoring) {
     this._playerName = ``;
     this.rules = rules;
-    this.challenges = challenges;
+    this.questions = questions;
     this.scoring = scoring;
 
     this.state = {
@@ -55,18 +55,18 @@ export default class Game {
 
   isOver() {
     return (
-      this.state.lives <= 0 || this.challenges.length === this.answers.length
+      this.state.lives <= 0 || this.questions.length === this.answers.length
     );
   }
 
   setAnswer(answer) {
-    const challenge = this.challenges.find((c) => c.id === answer.id);
-    if (!challenge) {
-      throw new Error(`challenge does not exist`);
+    const question = this.questions.find((c) => c.id === answer.id);
+    if (!question) {
+      throw new Error(`question does not exist`);
     }
 
     const result = {
-      isCorrect: Game.isAnswerCorrect(answer, challenge),
+      isCorrect: Game.isAnswerCorrect(answer, question),
       time: answer.time
     };
 
@@ -74,8 +74,8 @@ export default class Game {
     this.adjustLives(result);
   }
 
-  static isAnswerCorrect(answer, challenge) {
-    return challenge.options.every(
+  static isAnswerCorrect(answer, question) {
+    return question.answers.every(
         (option, index) => answer.options[index] === option.type
     );
   }
