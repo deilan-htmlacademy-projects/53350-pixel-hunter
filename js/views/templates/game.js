@@ -5,6 +5,6 @@ export function getGame(game, content, {showState} = {showState: true}) {
   return `${getHeader(game, {showState})}
   <section class="game">
     ${content}
-    ${getStats(game)}
+    ${getStats(game.result.stats)}
   </section>`;
 }
