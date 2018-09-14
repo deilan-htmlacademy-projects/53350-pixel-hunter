@@ -1,6 +1,6 @@
 import App from "../app";
 import {Game1View} from "../views/game/game-1";
-import {QuestionType} from "../data/questions";
+import {QuestionType} from "../domain/question-type";
 import {Game2View} from "../views/game/game-2";
 import {Game3View} from "../views/game/game-3";
 
@@ -60,7 +60,6 @@ export default class GameScreen {
   checkTime() {
     if (this.game.state.time >= this.game.rules.time) {
       this.onAnswer({
-        id: this.questionId,
         options: [],
         time: this.game.state.time
       });

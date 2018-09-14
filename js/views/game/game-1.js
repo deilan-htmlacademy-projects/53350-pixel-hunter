@@ -27,7 +27,6 @@ export class Game1View extends ScreenView {
         }
 
         const answer = {
-          id: this.question.id,
           options: [event.target.value],
           time: this.game.state.time
         };

@@ -1,13 +1,11 @@
 import {getAnswerRank} from "../score";
-import {ANSWER_RANK} from "./answer-rank";
-
-import {getAllQuestions} from "../data/questions";
-import {defaultScoring} from "../data/scoring";
-import {defaultRules} from "../data/rules";
+import {AnswerRank} from "./answer-rank";
+import {scoring as defaultScoring} from "../domain/scoring";
+import {rules as defaultRules} from "./rules";
 
 export default class Game {
-  static create() {
-    return new Game(defaultRules, getAllQuestions(), defaultScoring);
+  static create(questions) {
+    return new Game(defaultRules, questions, defaultScoring);
   }
 
   constructor(rules, questions, scoring) {
@@ -18,7 +16,8 @@ export default class Game {
 
     this.state = {
       lives: rules.lives,
-      time: 0
+      time: 0,
+      questionIndex: 0
     };
 
     this.answers = [];
@@ -60,7 +59,7 @@ export default class Game {
   }
 
   setAnswer(answer) {
-    const question = this.questions.find((c) => c.id === answer.id);
+    const question = this.questions[this.state.questionIndex];
     if (!question) {
       throw new Error(`question does not exist`);
     }
@@ -72,6 +71,7 @@ export default class Game {
 
     this.answers.push(result);
     this.adjustLives(result);
+    this.state.questionIndex++;
   }
 
   static isAnswerCorrect(answer, question) {
@@ -93,15 +93,15 @@ export default class Game {
     }));
 
     this.result.correctness = this.result.stats.filter(
-        (stat) => stat.result !== ANSWER_RANK.WRONG
+        (stat) => stat.result !== AnswerRank.WRONG
     ).length;
 
     this.result.quick = this.result.stats.filter(
-        (stat) => stat.result === ANSWER_RANK.QUICK
+        (stat) => stat.result === AnswerRank.QUICK
     ).length;
 
     this.result.slow = this.result.stats.filter(
-        (stat) => stat.result === ANSWER_RANK.SLOW
+        (stat) => stat.result === AnswerRank.SLOW
     ).length;
 
     this.result.lives = this.state.lives;

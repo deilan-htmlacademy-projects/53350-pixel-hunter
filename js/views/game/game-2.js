@@ -33,7 +33,6 @@ export class Game2View extends ScreenView {
         }
 
         const answer = {
-          id: this.question.id,
           options: inputs.map((input) => input.value),
           time: this.game.state.time
         };
