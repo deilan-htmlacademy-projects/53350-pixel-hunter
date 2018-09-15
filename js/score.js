@@ -1,8 +1,8 @@
-import {AnswerRank} from "./domain/answer-rank";
+import {Result} from "./domain/answer-rank";
 
-const CorrectnessScore = Object.freeze({
-  INCORRECT: 0,
-  CORRECT: 100
+const correctScore = Object.freeze({
+  CORRECT: 100,
+  INCORRECT: 0
 });
 
 const SUB_MIN_ANSWERS_SCORE = -1;
@@ -22,18 +22,18 @@ const SpeedTime = Object.freeze({
 
 export function getAnswerRank(answer) {
   if (!answer.isCorrect) {
-    return AnswerRank.WRONG;
+    return Result.WRONG;
   }
 
   if (answer.time < SpeedTime.QUICK) {
-    return AnswerRank.QUICK;
+    return Result.QUICK;
   }
 
   if (answer.time > SpeedTime.SLOW) {
-    return AnswerRank.SLOW;
+    return Result.SLOW;
   }
 
-  return AnswerRank.CORRECT;
+  return Result.CORRECT;
 }
 
 export function calculateScore(answers, livesCount) {
@@ -55,8 +55,8 @@ function calculateAnswerTotalScore(answers) {
 
 function calculateAnswerScore(answer) {
   return answer.isCorrect
-    ? CorrectnessScore.CORRECT + calculateAnswerSpeedScore(answer)
-    : CorrectnessScore.INCORRECT;
+    ? correctScore.CORRECT + calculateAnswerSpeedScore(answer)
+    : correctScore.INCORRECT;
 }
 
 function calculateAnswerSpeedScore(answer) {

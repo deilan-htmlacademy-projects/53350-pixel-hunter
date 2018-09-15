@@ -1,18 +1,14 @@
-import {getAnswerRank} from "../../score";
-
-export function getStats(game) {
+export function getStats(stats) {
   return `<ul class="stats">
-    ${getResults(game)}
+    ${getResults(stats)}
   </ul>`;
 }
 
-function getResults(game) {
-  return Array.from({length: game.rules.questions}, (_, i) =>
-    getResult(game.answers[i])
-  ).join(` `);
+function getResults(stats) {
+  return stats.map((statsItem) => getResult(statsItem)).join(` `);
 }
 
-function getResult(answer) {
-  const result = (answer && getAnswerRank(answer)) || `unknown`;
-  return `<li class="stats__result stats__result--${result}"></li>`;
+function getResult(statsItem) {
+  statsItem = statsItem || `unknown`;
+  return `<li class="stats__result stats__result--${statsItem}"></li>`;
 }

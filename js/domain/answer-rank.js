@@ -1,6 +1,7 @@
-export const AnswerRank = {
-  WRONG: `wrong`,
+export const Result = {
   CORRECT: `correct`,
+  WRONG: `wrong`,
+  QUICK: `fast`,
   SLOW: `slow`,
-  QUICK: `fast`
+  UNKNOWN: `unknown`
 };
