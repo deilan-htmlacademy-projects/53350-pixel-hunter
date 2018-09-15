@@ -8,7 +8,6 @@ function getResults(stats) {
   return stats.map((statsItem) => getResult(statsItem)).join(` `);
 }
 
-function getResult(statsItem) {
-  statsItem = statsItem || `unknown`;
+function getResult(statsItem = `unknown`) {
   return `<li class="stats__result stats__result--${statsItem}"></li>`;
 }

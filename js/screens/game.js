@@ -13,11 +13,10 @@ const CHALLENGE_GAME_SCREEN_MAP = {
 };
 
 export default class GameScreen {
-  constructor(game, questionId) {
+  constructor(game) {
     this.game = game;
-    this.questionId = questionId;
 
-    const question = this.game.questions[this.questionId - 1];
+    const question = this.game.questions[this.game.state.questionIndex];
 
     this.view = new CHALLENGE_GAME_SCREEN_MAP[question.type](
         this.game,
@@ -40,7 +39,7 @@ export default class GameScreen {
     if (this.game.isOver()) {
       App.showStats();
     } else {
-      App.showGame(this.questionId + 1);
+      App.showGame();
     }
   }
 
