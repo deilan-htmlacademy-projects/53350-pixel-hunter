@@ -1,24 +1,23 @@
 import {getAnswerRank} from "../score";
-import {ANSWER_RANK} from "./answer-rank";
-
-import {getAllChallenges} from "../data/challenges";
-import {SCORING} from "../data/scoring";
-import {RULES} from "../data/rules";
+import {AnswerRank} from "./answer-rank";
+import {scoring as defaultScoring} from "../domain/scoring";
+import {rules as defaultRules} from "./rules";
 
 export default class Game {
-  static create() {
-    return new Game(RULES, getAllChallenges(), SCORING);
+  static create(questions) {
+    return new Game(defaultRules, questions, defaultScoring);
   }
 
-  constructor(rules, challenges, scoring) {
+  constructor(rules, questions, scoring) {
     this._playerName = ``;
     this.rules = rules;
-    this.challenges = challenges;
+    this.questions = questions;
     this.scoring = scoring;
 
     this.state = {
       lives: rules.lives,
-      time: 0
+      time: 0,
+      questionIndex: 0
     };
 
     this.answers = [];
@@ -55,27 +54,28 @@ export default class Game {
 
   isOver() {
     return (
-      this.state.lives <= 0 || this.challenges.length === this.answers.length
+      this.state.lives <= 0 || this.questions.length === this.answers.length
     );
   }
 
   setAnswer(answer) {
-    const challenge = this.challenges.find((c) => c.id === answer.id);
-    if (!challenge) {
-      throw new Error(`challenge does not exist`);
+    const question = this.questions[this.state.questionIndex];
+    if (!question) {
+      throw new Error(`question does not exist`);
     }
 
     const result = {
-      isCorrect: Game.isAnswerCorrect(answer, challenge),
+      isCorrect: Game.isAnswerCorrect(answer, question),
       time: answer.time
     };
 
     this.answers.push(result);
     this.adjustLives(result);
+    this.state.questionIndex++;
   }
 
-  static isAnswerCorrect(answer, challenge) {
-    return challenge.options.every(
+  static isAnswerCorrect(answer, question) {
+    return question.answers.every(
         (option, index) => answer.options[index] === option.type
     );
   }
@@ -93,15 +93,15 @@ export default class Game {
     }));
 
     this.result.correctness = this.result.stats.filter(
-        (stat) => stat.result !== ANSWER_RANK.WRONG
+        (stat) => stat.result !== AnswerRank.WRONG
     ).length;
 
     this.result.quick = this.result.stats.filter(
-        (stat) => stat.result === ANSWER_RANK.QUICK
+        (stat) => stat.result === AnswerRank.QUICK
     ).length;
 
     this.result.slow = this.result.stats.filter(
-        (stat) => stat.result === ANSWER_RANK.SLOW
+        (stat) => stat.result === AnswerRank.SLOW
     ).length;
 
     this.result.lives = this.state.lives;

@@ -1,7 +1,7 @@
-export function getGameChallenge2(challenge) {
-  return `<p class="game__task">${challenge.task}</p>
+export function getGameQuestion2(question) {
+  return `<p class="game__task">${question.question}</p>
   <form class="game__content">
-    ${challenge.options.map((option, index) => getOption(option.image, index)).join(` `)}
+    ${question.answers.map((option, index) => getOption(option.image, index)).join(` `)}
   </form>`;
 }
 
@@ -16,7 +16,7 @@ function getOption(image, index) {
       <span>Фото</span>
     </label>
     <label class="game__answer game__answer--paint">
-      <input class="visually-hidden" name="question${index + 1}" type="radio" value="paint">
+      <input class="visually-hidden" name="question${index + 1}" type="radio" value="painting">
       <span>Рисунок</span>
     </label>
   </div>`;

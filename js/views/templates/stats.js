@@ -7,7 +7,7 @@ export function getStats(game) {
 }
 
 function getResults(game) {
-  return Array.from({length: game.rules.challenges}, (_, i) =>
+  return Array.from({length: game.rules.questions}, (_, i) =>
     getResult(game.answers[i])
   ).join(` `);
 }

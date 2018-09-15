@@ -1,7 +1,7 @@
-export function getGameChallenge1(challenge) {
-  return `<p class="game__task">${challenge.task}</p>
+export function getGameQuestion1(question) {
+  return `<p class="game__task">${question.question}</p>
   <form class="game__content game__content--wide">
-    ${getOption(challenge.options[0].image, 0)}
+    ${getOption(question.answers[0].image, 0)}
   </form>`;
 }
 
@@ -16,7 +16,7 @@ function getOption(image, index) {
       <span>Фото</span>
     </label>
     <label class="game__answer game__answer--paint">
-      <input class="visually-hidden" name="question${index + 1}" type="radio" value="paint">
+      <input class="visually-hidden" name="question${index + 1}" type="radio" value="painting">
       <span>Рисунок</span>
     </label>
   </div>`;

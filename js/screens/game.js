@@ -1,27 +1,27 @@
 import App from "../app";
 import {Game1View} from "../views/game/game-1";
-import {CHALLENGE_TYPES} from "../data/challenges";
+import {QuestionType} from "../domain/question-type";
 import {Game2View} from "../views/game/game-2";
 import {Game3View} from "../views/game/game-3";
 
 const ONE_SECOND = 1000;
 
 const CHALLENGE_GAME_SCREEN_MAP = {
-  [CHALLENGE_TYPES.FIRST]: Game1View,
-  [CHALLENGE_TYPES.SECOND]: Game2View,
-  [CHALLENGE_TYPES.THIRD]: Game3View
+  [QuestionType.TINDER_LIKE]: Game1View,
+  [QuestionType.TWO_OF_TWO]: Game2View,
+  [QuestionType.ONE_OF_THREE]: Game3View
 };
 
 export default class GameScreen {
-  constructor(game, challengeId) {
+  constructor(game, questionId) {
     this.game = game;
-    this.challengeId = challengeId;
+    this.questionId = questionId;
 
-    const challenge = this.game.challenges[this.challengeId - 1];
+    const question = this.game.questions[this.questionId - 1];
 
-    this.view = new CHALLENGE_GAME_SCREEN_MAP[challenge.type](
+    this.view = new CHALLENGE_GAME_SCREEN_MAP[question.type](
         this.game,
-        challenge
+        question
     );
 
     this.startTimer();
@@ -40,7 +40,7 @@ export default class GameScreen {
     if (this.game.isOver()) {
       App.showStats();
     } else {
-      App.showGame(this.challengeId + 1);
+      App.showGame(this.questionId + 1);
     }
   }
 
@@ -60,7 +60,6 @@ export default class GameScreen {
   checkTime() {
     if (this.game.state.time >= this.game.rules.time) {
       this.onAnswer({
-        id: this.challengeId,
         options: [],
         time: this.game.state.time
       });
