@@ -6,21 +6,6 @@ import EventEmitter from "../../utils/event-emitter";
 
 // Игровой экран с тремя изображениями
 export class Game3View extends ScreenView {
-  static _getAnswerTypeContext(question) {
-    const answerTypeCount = question.answers.reduce((acc, answer) => {
-      acc[answer.type] = (acc[answer.type] || 0) + 1;
-      return acc;
-    }, {});
-    for (const answerType in answerTypeCount) {
-      if (answerTypeCount[answerType] === 1) {
-        return {
-          expected: answerType,
-          opposite: AnswerType.getOppositeType(answerType)
-        };
-      }
-    }
-    throw new Error(`Unable to define answer type context`);
-  }
 
   constructor(game, question) {
     super();
@@ -71,5 +56,21 @@ export class Game3View extends ScreenView {
 
   _getCheckedInputs() {
     return Array.from(this.element.querySelectorAll(`.game__option`));
+  }
+
+  static _getAnswerTypeContext(question) {
+    const answerTypeCount = question.answers.reduce((acc, answer) => {
+      acc[answer.type] = (acc[answer.type] || 0) + 1;
+      return acc;
+    }, {});
+    for (const answerType in answerTypeCount) {
+      if (answerTypeCount[answerType] === 1) {
+        return {
+          expected: answerType,
+          opposite: AnswerType.getOppositeType(answerType)
+        };
+      }
+    }
+    throw new Error(`Unable to define answer type context`);
   }
 }

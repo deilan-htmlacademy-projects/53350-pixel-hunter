@@ -9,7 +9,7 @@ import QuestionsRepository from "./data/questions-repository";
 import {ErrorScreen} from "./screens/modal-error";
 import StatsRepository from "./data/stats-repository";
 import {config} from "./config";
-import GameResult from "./views/templates/result";
+import GameResult from "./domain/game-result";
 
 export default class App {
   static init(containerElement) {
@@ -33,15 +33,13 @@ export default class App {
     this._renderScreen(new RulesScreen(this.game));
   }
 
-  static showGame(questionId = 1) {
-    this._renderScreen(new GameScreen(this.game, questionId));
+  static showGame() {
+    this._renderScreen(new GameScreen(this.game));
   }
 
   static showStats() {
-    this.game.getGameResult();
-    this.game.getGameScore();
     const postData = {
-      stats: this.game.result.stats.map((stat) => stat.result),
+      stats: this.game.result.stats,
       lives: this.game.state.lives
     };
     StatsRepository.postResult(config.appId, this.game.playerName, postData)
