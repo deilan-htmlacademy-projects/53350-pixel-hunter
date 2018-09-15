@@ -7,6 +7,9 @@ import GameScreen from "./screens/game";
 import Game from "./domain/game";
 import QuestionsRepository from "./data/questions-repository";
 import {ErrorScreen} from "./screens/modal-error";
+import StatsRepository from "./data/stats-repository";
+import {config} from "./config";
+import GameResult from "./views/templates/result";
 
 export default class App {
   static init(containerElement) {
@@ -35,7 +38,23 @@ export default class App {
   }
 
   static showStats() {
-    this._renderScreen(new StatsScreen(this.game));
+    this.game.getGameResult();
+    this.game.getGameScore();
+    const postData = {
+      stats: this.game.result.stats.map((stat) => stat.result),
+      lives: this.game.state.lives
+    };
+    StatsRepository.postResult(config.appId, this.game.playerName, postData)
+      .then(() =>
+        StatsRepository.getResults(config.appId, this.game.playerName)
+      )
+      .then((res) => {
+        const gameResults = res.map(
+            (x) => new GameResult(x, this.game.rules, this.game.scoring)
+        );
+        this._renderScreen(new StatsScreen(this.game, gameResults));
+      })
+      .catch((error) => this.showError(error));
   }
 
   static showError(error) {

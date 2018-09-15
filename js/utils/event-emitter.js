@@ -46,7 +46,7 @@ export default class EventEmitter {
 
 function verifyEventType(eventType) {
   if (typeof eventType !== `string` && !(eventType instanceof String)) {
-    throw new Error(`eventType must be a function`);
+    throw new Error(`eventType must be a string`);
   }
 }
 
