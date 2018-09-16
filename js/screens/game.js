@@ -1,7 +1,9 @@
 import App from "../app";
 import {createGameView} from "./game-view-factory";
 
-const ONE_SECOND = 1000;
+const FIVE_HUNDREDS_MS = 500;
+const ONE_THOUSAND_MS = 1000;
+const FIVE_SEC = 5;
 
 export default class GameScreen {
   constructor(game) {
@@ -29,15 +31,20 @@ export default class GameScreen {
   }
 
   startTimer() {
-    this.timer = setInterval(() => {
+    this.tickInterval = setInterval(() => {
       this.game.tick();
       this.view.updateTime(this.game.state.time);
       this.checkTime();
-    }, ONE_SECOND);
+    }, ONE_THOUSAND_MS);
+    this.blinkTimeout = setTimeout(() => {
+      this.blinkInterval = setInterval(() => this.view.blinkTime(), FIVE_HUNDREDS_MS);
+    }, (this.game.rules.time - FIVE_SEC) * ONE_THOUSAND_MS);
   }
 
   stopTimer() {
-    clearInterval(this.timer);
+    clearInterval(this.tickInterval);
+    clearTimeout(this.blinkTimeout);
+    clearInterval(this.blinkInterval);
     this.game.resetTime();
   }
 
