@@ -58,7 +58,7 @@ export default class GameResult {
   }
 
   getLivesCount() {
-    return this.lives;
+    return Math.max(this.lives, 0);
   }
 
   getLivesTotal() {

@@ -9,7 +9,7 @@ export default class Game {
   }
 
   constructor(rules, questions, scoring) {
-    this._playerName = ``;
+    this.playerName = ``;
     this.rules = rules;
     this.questions = questions;
     this.scoring = scoring;
@@ -48,19 +48,15 @@ export default class Game {
     this.state.time = 0;
   }
 
-  die() {
-    this.lives--;
-  }
-
   isOver() {
     return (
-      this.state.lives <= 0 || this.questions.length === this.answers.length
+      this.state.lives < 0 || this.questions.length === this.answers.length
     );
   }
 
   isWin() {
     return (
-      this.state.lives > 0 && this.questions.length === this.answers.length
+      this.state.lives >= 0 && this.questions.length === this.answers.length
     );
   }
 
