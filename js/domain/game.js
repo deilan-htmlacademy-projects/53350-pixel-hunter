@@ -9,27 +9,11 @@ export default class Game {
   }
 
   constructor(rules, questions, scoring) {
-    this.playerName = ``;
     this.rules = rules;
     this.questions = questions;
     this.scoring = scoring;
 
-    this.state = {
-      lives: rules.lives,
-      time: 0,
-      questionIndex: 0
-    };
-
-    this.answers = [];
-
-    this.result = {
-      title: ``,
-      stats: Array.from({length: this.rules.questions}, () => Result.UNKNOWN),
-      correct: 0,
-      quick: 0,
-      lives: 0,
-      slow: 0
-    };
+    this.reset();
   }
 
   tick() {
@@ -37,11 +21,26 @@ export default class Game {
   }
 
   get playerName() {
-    return this._playerName;
+    return this._playerName || ``;
   }
 
   set playerName(value) {
     this._playerName = value;
+  }
+
+  reset() {
+    this.state = {
+      lives: this.rules.lives,
+      time: 0,
+      questionIndex: 0
+    };
+
+    this.answers = [];
+
+    this.stats = Array.from(
+        {length: this.rules.questions},
+        () => Result.UNKNOWN
+    );
   }
 
   resetTime() {
@@ -72,7 +71,7 @@ export default class Game {
     );
 
     this.answers.push(result);
-    this.result.stats[this.state.questionIndex] = result.getResultType();
+    this.stats[this.state.questionIndex] = result.getResultType();
     this.adjustLives(result);
     this.state.questionIndex++;
   }

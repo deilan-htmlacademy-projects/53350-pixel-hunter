@@ -12,7 +12,7 @@ export default class RulesScreen {
     });
 
     this.view.eventEmitter.on(`reset`, () => {
-      App.showIntro();
+      App.resetGame();
     });
   }
 }

@@ -1,34 +1,19 @@
 import App from "../app";
-import {Game1View} from "../views/game/game-1";
-import {QuestionType} from "../domain/question-type";
-import {Game2View} from "../views/game/game-2";
-import {Game3View} from "../views/game/game-3";
+import {createGameView} from "./game-view-factory";
 
 const ONE_SECOND = 1000;
-
-const CHALLENGE_GAME_SCREEN_MAP = {
-  [QuestionType.TINDER_LIKE]: Game1View,
-  [QuestionType.TWO_OF_TWO]: Game2View,
-  [QuestionType.ONE_OF_THREE]: Game3View
-};
 
 export default class GameScreen {
   constructor(game) {
     this.game = game;
-
-    const question = this.game.questions[this.game.state.questionIndex];
-
-    this.view = new CHALLENGE_GAME_SCREEN_MAP[question.type](
-        this.game,
-        question
-    );
+    this.view = createGameView(game);
 
     this.startTimer();
 
     this.view.eventEmitter.on(`answer`, (answer) => this.onAnswer(answer));
 
     this.view.eventEmitter.on(`reset`, () => {
-      App.showIntro();
+      App.resetGame();
     });
   }
 
