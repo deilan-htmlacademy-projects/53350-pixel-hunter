@@ -14,6 +14,13 @@ export default class ScreenView extends AbstractView {
     this.eventEmitter = new EventEmitter();
   }
 
+  get timerElement() {
+    if (!this.timerElement) {
+      this.timerElement = this.element.querySelector(`.game__timer`);
+    }
+    return this.timerElement;
+  }
+
   updateTime(time) {
     const timerElement = this.timerElement;
     if (timerElement) {
@@ -28,13 +35,6 @@ export default class ScreenView extends AbstractView {
         ? `black`
         : `red`;
     }
-  }
-
-  get timerElement() {
-    if (!this._timerElement) {
-      this._timerElement = this.element.querySelector(`.game__timer`);
-    }
-    return this._timerElement;
   }
 
   _bind(_element) {

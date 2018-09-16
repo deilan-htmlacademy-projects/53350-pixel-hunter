@@ -19,6 +19,10 @@ export class Game3View extends ScreenView {
     return getGame(this.game, getGameQuestion3(this.question));
   }
 
+  _getCheckedInputs() {
+    return Array.from(this.element.querySelectorAll(`.game__option`));
+  }
+
   _bind(_element) {
     super._bind(_element);
 
@@ -52,10 +56,6 @@ export class Game3View extends ScreenView {
 
         this.eventEmitter.fire(`answer`, answer);
       });
-  }
-
-  _getCheckedInputs() {
-    return Array.from(this.element.querySelectorAll(`.game__option`));
   }
 
   static _getAnswerTypeContext(question) {
