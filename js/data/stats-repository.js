@@ -42,26 +42,28 @@ export default class StatsRepository {
   }
 }
 
-function verifyAppId(appId) {
+const verifyAppId = (appId) => {
   if (!Number.isInteger(appId)) {
     throw new Error(`appId must be an integer number`);
   }
-}
+};
 
-function verifyUsername(username) {
+const verifyUsername = (username) => {
   if (typeof username !== `string` && !(username instanceof String)) {
     throw new Error(`username must be a string`);
   }
   if (username.trim() === ``) {
     throw new Error(`username must be a non-empty string`);
   }
-}
+};
 
-function verifyCreateData(data) {
+const verifyCreateData = (data) => {
   // an example of valid data:
   // {
-  //   stats: ['correct', 'wrong', 'fast', 'slow', 'correct', 'wrong', 'fast', 'slow', 'correct', 'wrong'], // Статистика ответа пользователя
-  //   lives: 0 // Кол-во оставшихся жизней
+  //   // Статистика ответа пользователя
+  //   stats: ['correct', 'wrong', 'fast', 'slow', 'correct', 'wrong', 'fast', 'slow', 'correct', 'wrong'],
+  //   // Кол-во оставшихся жизней
+  //   lives: 0
   // }
 
   if (typeof data !== `object`) {
@@ -78,4 +80,4 @@ function verifyCreateData(data) {
   ) {
     throw new Error(`data.stats must be an array of strings`);
   }
-}
+};

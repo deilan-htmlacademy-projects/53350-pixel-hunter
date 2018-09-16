@@ -44,14 +44,14 @@ export default class EventEmitter {
   }
 }
 
-function verifyEventType(eventType) {
+const verifyEventType = (eventType) => {
   if (typeof eventType !== `string` && !(eventType instanceof String)) {
     throw new Error(`eventType must be a string`);
   }
-}
+};
 
-function verifyHandler(handler) {
+const verifyHandler = (handler) => {
   if (typeof handler !== `function`) {
-    throw new Error(`handler must be a function`);
+    throw new Error(`handler must be a const`);
   }
-}
+};

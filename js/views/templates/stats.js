@@ -1,13 +1,13 @@
-export function getStats(stats) {
+export const getStats = (stats) => {
   return `<ul class="stats">
     ${getResults(stats)}
   </ul>`;
-}
+};
 
-function getResults(stats) {
+const getResults = (stats) => {
   return stats.map((statsItem) => getResult(statsItem)).join(` `);
-}
+};
 
-function getResult(statsItem = `unknown`) {
+const getResult = (statsItem = `unknown`) => {
   return `<li class="stats__result stats__result--${statsItem}"></li>`;
-}
+};

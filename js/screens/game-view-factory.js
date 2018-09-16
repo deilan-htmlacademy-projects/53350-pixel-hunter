@@ -9,7 +9,7 @@ const CHALLENGE_GAME_SCREEN_MAP = {
   [QuestionType.ONE_OF_THREE]: Game3View
 };
 
-export function createGameView(game) {
+export const createGameView = (game) => {
   const question = game.questions[game.state.questionIndex];
   return new CHALLENGE_GAME_SCREEN_MAP[question.type](game, question);
-}
+};

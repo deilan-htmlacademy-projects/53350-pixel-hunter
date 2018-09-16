@@ -1,4 +1,4 @@
-export function getBackButton() {
+export const getBackButton = () => {
   return `<button class="back">
     <span class="visually-hidden">Вернуться к началу</span>
     <svg class="icon" width="45" height="45" viewBox="0 0 45 45" fill="#000000">
@@ -8,4 +8,4 @@ export function getBackButton() {
       <use xlink:href="img/sprite.svg#logo-small"></use>
     </svg>
   </button>`;
-}
+};

@@ -1,11 +1,11 @@
-export function getGameQuestion1(question) {
+export const getGameQuestion1 = (question) => {
   return `<p class="game__task">${question.question}</p>
   <form class="game__content game__content--wide">
     ${getOption(question.answers[0].image, 0)}
   </form>`;
-}
+};
 
-function getOption(image, index) {
+const getOption = (image, index) => {
   return `<div class="game__option">
     <img src="${image.url}"
       alt="${image.description}"
@@ -20,4 +20,4 @@ function getOption(image, index) {
       <span>Рисунок</span>
     </label>
   </div>`;
-}
+};

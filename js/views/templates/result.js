@@ -1,7 +1,7 @@
 import {getHeader} from "./header";
 import {getStats} from "./stats";
 
-export function getResult(game, gameResults) {
+export const getResult = (game, gameResults) => {
   return `${getHeader(game)}
   <section class="result">
     <h2 class="result__title">
@@ -9,15 +9,15 @@ export function getResult(game, gameResults) {
     </h2>
     ${getResultTables(gameResults)}
   </section>`;
-}
+};
 
-function getResultTables(gameResults) {
+const getResultTables = (gameResults) => {
   return gameResults
     .map((gameResult, index) => getResultTable(gameResult, index))
     .join(` `);
-}
+};
 
-function getResultTable(gameResult, index) {
+const getResultTable = (gameResult, index) => {
   return `<table class="result__table">
     ${getGeneral(gameResult, index)}
     ${getSpeed(gameResult)}
@@ -25,9 +25,9 @@ function getResultTable(gameResult, index) {
     ${getSlow(gameResult)}
     ${getTotal(gameResult)}
   </table>`;
-}
+};
 
-function getGeneral(gameResult, index) {
+const getGeneral = (gameResult, index) => {
   return `<tr>
     <td class="result__number">${index + 1}.</td>
     <td colspan="2">
@@ -38,9 +38,9 @@ function getGeneral(gameResult, index) {
       ${gameResult.isWin() ? gameResult.getCorrectTotal() : `Fail`}
     </td>
   </tr>`;
-}
+};
 
-function getSpeed(gameResult) {
+const getSpeed = (gameResult) => {
   return `<tr>
     <td></td>
     <td class="result__extra">Бонус за скорость:</td>
@@ -51,9 +51,9 @@ function getSpeed(gameResult) {
     <td class="result__points">× ${gameResult.getQuickPoints()}</td>
     <td class="result__total">${gameResult.getQuickTotal()}</td>
   </tr>`;
-}
+};
 
-function getLives(gameResult) {
+const getLives = (gameResult) => {
   return `<tr>
     <td></td>
     <td class="result__extra">Бонус за жизни:</td>
@@ -64,9 +64,9 @@ function getLives(gameResult) {
     <td class="result__points">× ${gameResult.getLivesPoints()}</td>
     <td class="result__total">${gameResult.getLivesTotal()}</td>
   </tr>`;
-}
+};
 
-function getSlow(gameResult) {
+const getSlow = (gameResult) => {
   return `<tr>
     <td></td>
     <td class="result__extra">Штраф за медлительность:</td>
@@ -77,12 +77,12 @@ function getSlow(gameResult) {
     <td class="result__points">× ${gameResult.getSlowPoints()}</td>
     <td class="result__total">${gameResult.getSlowTotal()}</td>
   </tr>`;
-}
+};
 
-function getTotal(gameResult) {
+const getTotal = (gameResult) => {
   return `<tr>
     <td colspan="5" class="result__total result__total--final">
     ${gameResult.getFinalTotal()}
     </td>
   </tr>`;
-}
+};

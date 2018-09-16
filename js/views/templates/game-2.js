@@ -1,11 +1,11 @@
-export function getGameQuestion2(question) {
+export const getGameQuestion2 = (question) => {
   return `<p class="game__task">${question.question}</p>
   <form class="game__content">
     ${question.answers.map((option, index) => getOption(option.image, index)).join(` `)}
   </form>`;
-}
+};
 
-function getOption(image, index) {
+const getOption = (image, index) => {
   return `<div class="game__option">
     <img src="${image.url}"
       alt="${image.description}"
@@ -20,4 +20,4 @@ function getOption(image, index) {
       <span>Рисунок</span>
     </label>
   </div>`;
-}
+};
