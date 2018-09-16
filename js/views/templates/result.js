@@ -34,7 +34,9 @@ function getGeneral(gameResult, index) {
       ${getStats(gameResult.stats)}
     </td>
     <td class="result__points">× ${gameResult.getCorrectPoints()}</td>
-    <td class="result__total">${gameResult.getCorrectTotal()}</td>
+    <td class="result__total">
+      ${gameResult.isWin() ? gameResult.getCorrectTotal() : `Fail`}
+    </td>
   </tr>`;
 }
 

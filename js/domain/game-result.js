@@ -11,10 +11,6 @@ export default class GameResult {
     this.scoring = scoring;
   }
 
-  _getStatsLength(statsItemPredicate) {
-    return this.stats.filter(statsItemPredicate).length;
-  }
-
   getCorrectPoints() {
     return this.scoring.correct;
   }
@@ -72,5 +68,13 @@ export default class GameResult {
       this.getLivesTotal() +
       this.getSlowTotal()
     );
+  }
+
+  isWin() {
+    return this.lives >= 0;
+  }
+
+  _getStatsLength(statsItemPredicate) {
+    return this.stats.filter(statsItemPredicate).length;
   }
 }
