@@ -1,4 +1,4 @@
-export function render(container, element) {
-  container.innerHTML = ``;
-  container.appendChild(element);
-}
+export const render = (containerElement, element) => {
+  containerElement.innerHTML = ``;
+  containerElement.appendChild(element);
+};

@@ -16,6 +16,21 @@ export class Game2View extends ScreenView {
     return getGame(this.game, getGameQuestion2(this.question));
   }
 
+  _getCheckedInputs() {
+    return Array.from(this.element.querySelectorAll(`.game__option`)).reduce(
+        (inputs, gameOption) => {
+          const input = gameOption.querySelector(`input[type=radio]:checked`);
+
+          if (input) {
+            inputs.push(input);
+          }
+
+          return inputs;
+        },
+        []
+    );
+  }
+
   _bind(_element) {
     super._bind(_element);
 
@@ -39,20 +54,5 @@ export class Game2View extends ScreenView {
 
         this.eventEmitter.fire(`answer`, answer);
       });
-  }
-
-  _getCheckedInputs() {
-    return Array.from(this.element.querySelectorAll(`.game__option`)).reduce(
-        (inputs, gameOption) => {
-          const input = gameOption.querySelector(`input[type=radio]:checked`);
-
-          if (input) {
-            inputs.push(input);
-          }
-
-          return inputs;
-        },
-        []
-    );
   }
 }

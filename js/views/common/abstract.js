@@ -10,6 +10,15 @@ export default class AbstractView {
     }
   }
 
+  get element() {
+    if (!this._element) {
+      this._element = this._render();
+      this._bind(this._element);
+    }
+
+    return this._element;
+  }
+
   get _template() {
     throw new Error(`'_template' getter must be overrided`);
   }
@@ -19,13 +28,4 @@ export default class AbstractView {
   }
 
   _bind(_element) {}
-
-  get element() {
-    if (!this._element) {
-      this._element = this._render();
-      this._bind(this._element);
-    }
-
-    return this._element;
-  }
 }

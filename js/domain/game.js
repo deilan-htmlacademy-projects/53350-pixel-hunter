@@ -4,63 +4,54 @@ import {rules as defaultRules} from "./rules";
 import Answer from "./answer";
 
 export default class Game {
-  static create(questions) {
-    return new Game(defaultRules, questions, defaultScoring);
-  }
-
   constructor(rules, questions, scoring) {
-    this._playerName = ``;
     this.rules = rules;
     this.questions = questions;
     this.scoring = scoring;
 
-    this.state = {
-      lives: rules.lives,
-      time: 0,
-      questionIndex: 0
-    };
-
-    this.answers = [];
-
-    this.result = {
-      title: ``,
-      stats: Array.from({length: this.rules.questions}, () => Result.UNKNOWN),
-      correct: 0,
-      quick: 0,
-      lives: 0,
-      slow: 0
-    };
-  }
-
-  tick() {
-    this.state.time++;
+    this.reset();
   }
 
   get playerName() {
-    return this._playerName;
+    return this._playerName || ``;
   }
 
   set playerName(value) {
     this._playerName = value;
   }
 
+  tick() {
+    this.state.time += 1000;
+  }
+
+  reset() {
+    this.state = {
+      lives: this.rules.lives,
+      time: 0,
+      questionIndex: 0
+    };
+
+    this.answers = [];
+
+    this.stats = Array.from(
+        {length: this.rules.questions},
+        () => Result.UNKNOWN
+    );
+  }
+
   resetTime() {
     this.state.time = 0;
   }
 
-  die() {
-    this.lives--;
-  }
-
   isOver() {
     return (
-      this.state.lives <= 0 || this.questions.length === this.answers.length
+      this.state.lives < 0 || this.questions.length === this.answers.length
     );
   }
 
   isWin() {
     return (
-      this.state.lives > 0 && this.questions.length === this.answers.length
+      this.state.lives >= 0 && this.questions.length === this.answers.length
     );
   }
 
@@ -76,20 +67,24 @@ export default class Game {
     );
 
     this.answers.push(result);
-    this.result.stats[this.state.questionIndex] = result.getResultType();
-    this.adjustLives(result);
+    this.stats[this.state.questionIndex] = result.getResultType();
+    this._adjustLives(result);
     this.state.questionIndex++;
+  }
+
+  _adjustLives(answer) {
+    if (!answer.isCorrect) {
+      this.state.lives -= 1;
+    }
+  }
+
+  static create(questions) {
+    return new Game(defaultRules, questions, defaultScoring);
   }
 
   static isAnswerCorrect(answer, question) {
     return question.answers.every(
         (option, index) => answer.options[index] === option.type
     );
-  }
-
-  adjustLives(answer) {
-    if (!answer.isCorrect) {
-      this.state.lives -= 1;
-    }
   }
 }

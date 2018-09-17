@@ -1,34 +1,23 @@
 import App from "../app";
-import {Game1View} from "../views/game/game-1";
-import {QuestionType} from "../domain/question-type";
-import {Game2View} from "../views/game/game-2";
-import {Game3View} from "../views/game/game-3";
+import {createGameView} from "./game-view-factory";
 
-const ONE_SECOND = 1000;
-
-const CHALLENGE_GAME_SCREEN_MAP = {
-  [QuestionType.TINDER_LIKE]: Game1View,
-  [QuestionType.TWO_OF_TWO]: Game2View,
-  [QuestionType.ONE_OF_THREE]: Game3View
-};
+const SECONDS = Object.freeze({
+  HALF: 500,
+  ONE: 1000,
+  FIVE: 5000
+});
 
 export default class GameScreen {
   constructor(game) {
     this.game = game;
-
-    const question = this.game.questions[this.game.state.questionIndex];
-
-    this.view = new CHALLENGE_GAME_SCREEN_MAP[question.type](
-        this.game,
-        question
-    );
+    this.view = createGameView(game);
 
     this.startTimer();
 
     this.view.eventEmitter.on(`answer`, (answer) => this.onAnswer(answer));
 
     this.view.eventEmitter.on(`reset`, () => {
-      App.showIntro();
+      App.resetGame();
     });
   }
 
@@ -44,15 +33,21 @@ export default class GameScreen {
   }
 
   startTimer() {
-    this.timer = setInterval(() => {
+    this.tickInterval = setInterval(() => {
       this.game.tick();
-      this.view.updateTime(this.game.state.time);
+      this.view.updateTime(this.game.state.time / SECONDS.ONE);
       this.checkTime();
-    }, ONE_SECOND);
+    }, SECONDS.ONE);
+    const blinkTime = this.game.rules.time - SECONDS.FIVE;
+    this.blinkTimeout = setTimeout(() => {
+      this.blinkInterval = setInterval(() => this.view.blinkTime(), SECONDS.HALF);
+    }, blinkTime);
   }
 
   stopTimer() {
-    clearInterval(this.timer);
+    clearInterval(this.tickInterval);
+    clearTimeout(this.blinkTimeout);
+    clearInterval(this.blinkInterval);
     this.game.resetTime();
   }
 

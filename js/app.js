@@ -37,9 +37,14 @@ export default class App {
     this._renderScreen(new GameScreen(this.game));
   }
 
+  static resetGame() {
+    this.game.reset();
+    this.showGreeting();
+  }
+
   static showStats() {
     const postData = {
-      stats: this.game.result.stats,
+      stats: this.game.stats,
       lives: this.game.state.lives
     };
     StatsRepository.postResult(config.appId, this.game.playerName, postData)

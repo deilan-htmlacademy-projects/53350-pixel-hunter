@@ -8,7 +8,7 @@ export default class StatsScreen {
     this.view = new StatsView(this.game, gameResults);
 
     this.view.eventEmitter.on(`reset`, () => {
-      App.showIntro();
+      App.resetGame();
     });
   }
 }
