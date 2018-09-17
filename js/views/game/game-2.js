@@ -17,18 +17,8 @@ export class Game2View extends ScreenView {
   }
 
   _getCheckedInputs() {
-    return Array.from(this.element.querySelectorAll(`.game__option`)).reduce(
-        (inputs, gameOption) => {
-          const input = gameOption.querySelector(`input[type=radio]:checked`);
-
-          if (input) {
-            inputs.push(input);
-          }
-
-          return inputs;
-        },
-        []
-    );
+    const gameOptions = Array.from(this.element.querySelectorAll(`.game__option`));
+    return Game2View._getCheckedInputs(gameOptions);
   }
 
   _bind(_element) {
@@ -54,5 +44,18 @@ export class Game2View extends ScreenView {
 
         this.eventEmitter.fire(`answer`, answer);
       });
+  }
+
+  static _getCheckedInputs(gameOptionElements) {
+    const getCheckedInputs = (checkedInputs, gameOptionElement) => {
+      const checkedInput = gameOptionElement.querySelector(`input[type=radio]:checked`);
+
+      if (checkedInput) {
+        return [...checkedInputs, checkedInput];
+      }
+
+      return checkedInputs;
+    };
+    return gameOptionElements.reduce(getCheckedInputs, []);
   }
 }

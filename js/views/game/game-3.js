@@ -59,10 +59,11 @@ export class Game3View extends ScreenView {
   }
 
   static _getAnswerTypeContext(question) {
-    const answerTypeCount = question.answers.reduce((acc, answer) => {
-      acc[answer.type] = (acc[answer.type] || 0) + 1;
-      return acc;
-    }, {});
+    const getAnswerTypeToQuestionCount = (map, answer) => {
+      map[answer.type] = (map[answer.type] || 0) + 1;
+      return map;
+    };
+    const answerTypeCount = question.answers.reduce(getAnswerTypeToQuestionCount, {});
     for (const answerType in answerTypeCount) {
       if (answerTypeCount[answerType] === 1) {
         return {
