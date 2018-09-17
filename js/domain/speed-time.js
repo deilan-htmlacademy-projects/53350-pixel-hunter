@@ -1,4 +1,4 @@
 export const SpeedTime = Object.freeze({
-  SLOW: 20,
-  QUICK: 10
+  SLOW: 20000,
+  QUICK: 10000
 });

@@ -15,10 +15,10 @@ export default class ScreenView extends AbstractView {
   }
 
   get timerElement() {
-    if (!this.timerElement) {
-      this.timerElement = this.element.querySelector(`.game__timer`);
+    if (!this._timerElement) {
+      this._timerElement = this.element.querySelector(`.game__timer`);
     }
-    return this.timerElement;
+    return this._timerElement;
   }
 
   updateTime(time) {

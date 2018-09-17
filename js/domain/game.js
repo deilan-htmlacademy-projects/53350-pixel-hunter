@@ -21,7 +21,7 @@ export default class Game {
   }
 
   tick() {
-    this.state.time++;
+    this.state.time += 1000;
   }
 
   reset() {
