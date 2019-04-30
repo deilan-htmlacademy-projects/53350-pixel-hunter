@@ -1,7 +1,6 @@
 {
-  "name": "PixelHunter",
+  "name": "pixer-hunter",
   "version": "5.0.0",
-  "private": true,
   "description": "Личный проект «Пиксель хантер» от HTML Academy",
   "scripts": {
     "lint:commit": "commitlint-travis",
@@ -11,7 +10,8 @@
     "start": "gulp serve",
     "test": "gulp test",
     "ci:travis": "npm-run-all -c -p --aggregate-output lint:* test build",
-    "ci": "npm-run-all -c -p --aggregate-output lint:js lint:scss test build"
+    "ci": "npm-run-all -c -p --aggregate-output lint:js lint:scss test build",
+    "deploy": "gh-pages -d build"
   },
   "devDependencies": {
     "@commitlint/cli": "7.0.0",
@@ -26,6 +26,7 @@
     "del": "3.0.0",
     "eslint": "4.19.1",
     "eslint-config-htmlacademy": "0.5.x",
+    "gh-pages": "2.0.1",
     "gulp": "3.9.1",
     "gulp-better-rollup": "3.3.0",
     "gulp-csso": "3.0.1",
